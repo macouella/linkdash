@@ -209,9 +209,14 @@ const main = async () => {
     console.log(usage);
     process.exit(0);
   } else if (options.init) {
-    fs.copyFileSync(CONFIG_TEMPLATE, CONFIG_COPY_PATH);
-    console.log("Config file created: ", CONFIG_COPY_PATH);
-    process.exit(0);
+    if (!fs.existsSync(CONFIG_COPY_PATH)) {
+      fs.copyFileSync(CONFIG_TEMPLATE, CONFIG_COPY_PATH);
+      console.log("Config file created: ", CONFIG_COPY_PATH);
+      process.exit(0);
+    } else {
+      console.log("Prevented an overwrite. Delete your existing config first.");
+      process.exit(1);
+    }
   }
 
   const fileToLoad = getFileToLoad(options.config);
