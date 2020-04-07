@@ -21,9 +21,12 @@ export const buildTemplate = (options: ILinkdashCliOptions) => {
   validateConfig(options);
   let template = fs.readFileSync(TEMPLATE_BASE).toString();
   template = template.replace(
-    /\/\/_linkshopUrl/gi,
+    "//_linkshopUrl",
     `window.linkdashConfig = JSON.parse('${JSON.stringify(options)}')`
   );
+
+  template = template.replace("<!--linkdashHead-->", options.htmlHead || "");
+
   return template;
 };
 

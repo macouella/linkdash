@@ -1,8 +1,6 @@
 module.exports = async () => {
   return {
     title: "Welcome to my linkdash!", // title of the page
-    disableOpen: false, // disables auto-opening after a build
-    output: "./linkdash.html", // outputs the generated template to the specified path
 
     // a list of static urls to build the linkdash list from
     urls: [
@@ -53,5 +51,15 @@ module.exports = async () => {
     // If using the host option, replace the urls above with the host
     // options below. You'll need to return a payload similar to this config.
     // host: "http://yourapi.com/something",
+
+    // other options
+    disableOpen: false, // disables auto-opening after a build
+    output: "./linkdash.html", // outputs the generated template to the specified path
+
+    // injects raw html to the <head>
+    htmlHead: `
+      <title>This title will show when no title is set above.</title>
+      <meta name="robots" content="noindex" />
+    `.trim(),
   };
 };
