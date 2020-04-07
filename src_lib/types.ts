@@ -12,16 +12,11 @@ export interface IQueryLinkdashConfig {
   title?: string;
 }
 
-export interface ILinkdashConfig extends IQueryLinkdashConfig {
-  urls?: ILinkdashRow[];
-}
-
-export interface ILinkdashCliOptions {
-  host?: string;
+export interface ILinkdashCliOptions extends IQueryLinkdashConfig {
   help?: string;
   output?: string | "text";
   config?: string;
   disableOpen?: boolean;
-  title?: string;
   init?: boolean;
+  urls?: ILinkdashRow[];
 }

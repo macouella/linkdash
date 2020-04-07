@@ -8,12 +8,14 @@
   "types": "./lib/index.d.ts",
   "main": "./lib/index.js",
   "scripts": {
-    "clean": "rm -rf dist",
-    "webpack": "webpack --config webpack.prod.js",
-    "build": "yarn clean && yarn webpack",
+    "build:chmodbin": "chmod +x lib/bin.js",
     "build:lib": "rm -rf lib && tsc -p tsconfig.lib.json && chmod +x ./lib/bin.js",
+    "build:template": "webpack --config webpack.prod.js",
+    "build": "yarn clean && yarn build:template && yarn build:lib && yarn build:chmodbin",
+    "clean": "rm -rf dist; rm -rf lib;",
+    "dev:server": "json-server --watch src/fake.json --port 1337",
     "dev": " webpack-dev-server --config webpack.common.js",
-    "dev:server": "json-server --watch src/fake.json --port 1337"
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",

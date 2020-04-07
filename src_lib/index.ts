@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import fs from "fs";
 import path from "path";
-import { ILinkdashConfig } from "./types";
+import { ILinkdashCliOptions } from "./types";
 
 const TEMPLATE_BASE = path.resolve(__dirname, "../dist/index.html");
 
@@ -9,7 +9,7 @@ const TEMPLATE_BASE = path.resolve(__dirname, "../dist/index.html");
  * Validates the minimum config required for a template to be built.
  */
 const validateConfig = (fileOptions: any) => {
-  if (typeof fileOptions !== "object" || !fileOptions || !fileOptions.urls) {
+  if (typeof fileOptions !== "object" || !fileOptions || (!fileOptions.urls && !fileOptions.host)) {
     throw Error("Invalid config supplied");
   }
 };
@@ -17,7 +17,7 @@ const validateConfig = (fileOptions: any) => {
 /**
  * Builds a template with the provided options.
  */
-export const buildTemplate = (options: ILinkdashConfig) => {
+export const buildTemplate = (options: ILinkdashCliOptions) => {
   validateConfig(options);
   let template = fs.readFileSync(TEMPLATE_BASE).toString();
   template = template.replace(
@@ -32,7 +32,7 @@ export const buildTemplate = (options: ILinkdashConfig) => {
  */
 const loadFile = (fileToLoad: string) => {
   fileToLoad = path.resolve(fileToLoad);
-  const file: (() => ILinkdashConfig) | ILinkdashConfig = require(fileToLoad);
+  const file: (() => ILinkdashCliOptions) | ILinkdashCliOptions = require(fileToLoad);
   return file;
 };
 
@@ -53,7 +53,7 @@ export const loadConfig = async (fileToLoad: string) => {
  */
 export const loadConfigSync = (fileToLoad: string) => {
   const file = loadFile(fileToLoad);
-  let fileOptions = file as ILinkdashConfig;
+  let fileOptions = file as ILinkdashCliOptions;
   if (typeof file === "function") fileOptions = file();
   return fileOptions;
 };

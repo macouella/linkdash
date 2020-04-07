@@ -2,16 +2,16 @@ import axios from "axios";
 import { snakeCase } from "change-case";
 import qs from "qs";
 import * as React from "react";
-import { ILinkdashConfig, IQueryLinkdashConfig } from "../src_lib/types";
+import { ILinkdashCliOptions, IQueryLinkdashConfig } from "../src_lib/types";
 import "./app.sass";
 import Terminal from "./Terminal";
 
 const App = function () {
-  const [config, setConfig] = React.useState<ILinkdashConfig>({});
+  const [config, setConfig] = React.useState<ILinkdashCliOptions>({});
   const [isLoadingDone, setIsLoadingDone] = React.useState<boolean>(false);
   React.useEffect(() => {
     (async () => {
-      const windowConfig: ILinkdashConfig = (window as any).linkdashConfig || {};
+      const windowConfig: ILinkdashCliOptions = (window as any).linkdashConfig || {};
       const qu: IQueryLinkdashConfig = qs.parse(location.search.slice(1));
       let confie = { ...windowConfig, ...qu };
       const host = confie.host;
@@ -22,7 +22,7 @@ const App = function () {
 
       try {
         if (host) {
-          const hostConfig = await axios.get<ILinkdashConfig>(host);
+          const hostConfig = await axios.get<ILinkdashCliOptions>(host);
           confie = { ...confie, ...hostConfig.data };
         }
 
@@ -35,6 +35,7 @@ const App = function () {
         }));
         setConfig(confie);
       } catch (e) {
+        setConfig({ host });
         console.error(e);
       } finally {
         setIsLoadingDone(true);
