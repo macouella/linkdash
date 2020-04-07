@@ -50,8 +50,8 @@ module.exports = async () => {
       },
     ],
 
-    // if using the host option, swap the urls for below
-    // you'll need to return a payload similar to this config.
+    // If using the host option, replace the urls above with the host
+    // options below. You'll need to return a payload similar to this config.
     // host: "http://yourapi.com/something",
   };
 };

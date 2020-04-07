@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 import commandLineArgs from "command-line-args";
 import commandLineUsage from "command-line-usage";
@@ -105,10 +105,17 @@ const ensureDirectoryExistence = (filePath: string) => {
 const mergeOptions = async (fileToLoad?: string) => {
   let opts = { ...options };
   if (fileToLoad) {
+    const fileConfig = await loadConfig(fileToLoad);
+
     opts = {
-      ...opts,
-      ...(await loadConfig(fileToLoad)),
+      ...fileConfig,
+      ...options, // flags take precedence over config file values
     };
+
+    // When flag is specified, remove urls
+    if (options.host) {
+      delete opts.urls;
+    }
   }
   return opts;
 };
@@ -139,9 +146,22 @@ const saveFile = ({
 /**
  * Validates cli options.
  */
-const validateOptions = ({ output }: Partial<ILinkdashCliOptions>) => {
+const validateOptions = ({ output, host, urls }: Partial<ILinkdashCliOptions>) => {
+  if (host) {
+    if (!/^https?:\/\//.test(host)) {
+      console.log("Host needs include the full protocol e.g. http://yourwebsite.com");
+      process.exit(1);
+    }
+  }
+
+  if (urls && host) {
+    console.log(urls, host);
+    console.log("Found urls and host both in the same file. Only specify one or the other.");
+    process.exit(1);
+  }
+
   if (output) {
-    if (!output.match(/(.html$|text)/)) {
+    if (!output.match(/(.html?$|text)/)) {
       console.log("Please provide a valid html output path e.g. ./something/index.html");
       process.exit(1);
     }

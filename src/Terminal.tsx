@@ -12,10 +12,7 @@ const Nothing = () => <p>There's nothing here...</p>;
 const CantLoad = ({ loadType }: { loadType: string }) => {
   return (
     <div>
-      <p>
-        Hmm... we can't seem to load{" "}
-        {loadType === "window config" ? "the window config." : loadType}
-      </p>
+      <p>Hmm... we can't seem to load {loadType}</p>
       <p>
         Please check your settings or if using the host option, ensure that your api responds with
         the following payload:
