@@ -1,0 +1,5 @@
+*
+!dist/index.html
+!lib/*
+!package.json
+!README.md

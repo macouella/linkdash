@@ -1,12 +1,12 @@
 {
   "name": "linkdash",
-  "version": "0.0.4",
-  "description": "Dashie",
+  "version": "0.0.1",
+  "description": "A links dashboard",
   "bin": {
     "linkdash": "./lib/bin.js"
   },
   "types": "./lib/index.d.ts",
-  "main": "./lib/tmepl.js",
+  "main": "./lib/index.js",
   "scripts": {
     "clean": "rm -rf dist",
     "webpack": "webpack --config webpack.prod.js",
@@ -17,11 +17,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ReactJSResources/dashie"
+    "url": "https://github.com/igimanaloto/linkdash"
   },
   "author": "Igi Manaloto",
   "license": "MIT",
-  "homepage": "https://github.com/ReactJSResources/dashie#readme",
+  "homepage": "https://github.com/igimanaloto/linkdash#readme",
   "dependencies": {
     "command-line-args": "^5.1.1",
     "command-line-usage": "^6.1.0",
