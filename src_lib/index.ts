@@ -2,6 +2,7 @@
 import fs from "fs";
 import path from "path";
 import { ILinkdashCliOptions } from "./types";
+export * from "./types";
 
 const TEMPLATE_BASE = path.resolve(__dirname, "../dist/index.html");
 
