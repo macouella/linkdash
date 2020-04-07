@@ -13,6 +13,7 @@ export interface IQueryLinkdashConfig {
 }
 
 export interface ILinkdashCliOptions extends IQueryLinkdashConfig {
+  htmlHead?: string;
   help?: string;
   output?: string | "text";
   config?: string;
