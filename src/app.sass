@@ -1,0 +1,154 @@
+$transition: 80ms ease-out all
+$grey-9: #909090
+$grey-f: #f1f1f1
+
+.terminal
+  font-size: 18px
+  font-size: 1rem
+  line-height: 1.6
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif
+
+  *
+    box-sizing: border-box
+    outline: none
+  ::placeholder
+    color: $grey-9
+
+  .btn-list
+    text-align: center
+    display: flex
+    width: 100%
+    max-width: 40rem
+    margin-left: auto
+    margin-right: auto
+    justify-content: center
+    flex-flow: wrap
+
+  .btn-list a
+    margin-bottom: 1rem
+
+  .btn-list a
+    flex: none
+    width: 40%
+    margin-left: 1%
+    margin-right: 1%
+    display: inline-flex
+    padding: 1rem
+    border: 1px solid black
+
+
+  .btn-list a:hover
+    background: black
+    color: white
+
+
+  a
+    text-decoration: none
+    color: black
+
+
+  hr
+    margin-top: 1rem
+    margin-bottom: 1rem
+    border: none
+    border-top: 1px solid black
+
+
+  h3
+    margin-top: 0
+    text-align: center
+    font-size: 3rem
+    margin-bottom: 1rem
+
+  input
+    outline: none
+  .input-search
+    margin-bottom: 1rem
+    font-size: 1.25rem
+    display: block
+    font-weight: 500
+    padding: 0.75rem 0.75rem
+    border: 2px solid black
+    width: 100%
+
+  .search-item
+    display: flex
+    align-items: flex-end
+    line-height: 1
+    padding: 0.4rem 0.5rem
+    &:hover, &.search-item--active
+      background: black
+      color: white
+
+  .search-item-name
+    display: inline-flex
+    margin-right: auto
+  .search-item-group, .search-item-count
+    font-weight: 500
+    display: inline-flex
+    font-size: 0.8em
+    text-transform: uppercase
+    color: $grey-9
+    padding-bottom: 0.1em
+  .search-item-count
+    // margin-right: 0.2rem
+
+  .search-item-group
+    margin-right: 1rem
+    min-width: 4rem
+
+  .search-item-count
+    margin-left: 0.2rem
+
+  .toolbar
+    position: fixed
+    bottom: 2rem
+    right: 0rem
+    padding: 1rem
+    max-width: 20rem
+    z-index: 1
+
+  .button
+    padding: 0.5rem 1rem
+    background: white
+    color: black
+    border: none
+    text-transform: lowercase
+    font-size: 0.9rem
+    line-height: 1
+    border: 1px solid black
+    &:hover
+      cursor: pointer
+      background: black
+      color: white
+
+  .top
+    position: relative
+
+
+  @keyframes spin
+    0%
+      transform: rotate(0deg)
+    100%
+      transform: rotate(360deg)
+
+
+
+  .loader-wrap
+    text-align: center
+    padding-top: 1rem
+    padding-bottom: 1rem
+  .loader
+    border: 5px solid $grey-f
+    animation: spin 600ms linear infinite
+    border-right: 5px solid $grey-9
+    border-radius: 50%
+    width: 3rem
+    height: 3rem
+    display: inline-flex
+  p, pre, code, ul, ol, li
+    margin-top: 0
+    margin-bottom: 0.5rem
+  pre
+    background: $grey-f
+    padding: 1rem
