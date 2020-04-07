@@ -1,5 +1,6 @@
 *
 !dist/index.html
 !lib/*
+!init/*
 !package.json
 !README.md
