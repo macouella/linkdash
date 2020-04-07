@@ -20,12 +20,13 @@ const validateConfig = (fileOptions: any) => {
 export const buildTemplate = (options: ILinkdashCliOptions) => {
   validateConfig(options);
   let template = fs.readFileSync(TEMPLATE_BASE).toString();
+  const { htmlHead, ...filteredOptions } = options;
   template = template.replace(
-    "//_linkshopUrl",
-    `window.linkdashConfig = JSON.parse('${JSON.stringify(options)}')`
+    "//_linkdashOptions",
+    `window.linkdashConfig = JSON.parse('${JSON.stringify(filteredOptions)}')`
   );
 
-  template = template.replace("<!--linkdashHead-->", options.htmlHead || "");
+  template = template.replace("<!--linkdashHead-->", htmlHead || "");
 
   return template;
 };
