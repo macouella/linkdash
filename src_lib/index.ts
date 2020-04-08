@@ -20,7 +20,7 @@ export const buildTemplate = (options: ILinkdashCliOptions) => {
     `window.linkdashConfig = JSON.parse('${JSON.stringify(filteredOptions)}')`
   );
 
-  template = template.replace("<!--linkdashHead-->", htmlHead || "");
+  template = template.replace('<meta name="linkdashHead" content=""/>', htmlHead || "");
 
   return template;
 };
