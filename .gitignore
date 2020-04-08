@@ -10,7 +10,7 @@ logs
 node_modules
 
 # Built files
-assets
+build
 lib
 ./linkdash.config.js
 ./linkdash.html

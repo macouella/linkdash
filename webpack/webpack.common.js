@@ -3,11 +3,21 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const CWD = process.cwd();
-const DIR_DEST = path.join(CWD, "assets");
+const DIR_DEST = path.join(CWD, "build");
 const DIR_SRC = path.join(CWD, "src");
 
+const getSampleConfig = () => {
+  const exampleConf = require("./demo.config.js")();
+  const { htmlHead, ...linkdashConfig } = exampleConf;
+  console.log(linkdashConfig);
+  return {
+    linkdashConfig,
+    htmlHead,
+  };
+};
+
 const config = (env) => ({
-  entry: [path.resolve(__dirname, "./src/index")],
+  entry: [path.resolve(DIR_SRC, "index")],
   devServer: {
     historyApiFallback: true,
     contentBase: DIR_DEST,
@@ -28,6 +38,7 @@ const config = (env) => ({
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(DIR_SRC, "index.html"),
+      ...(process.env.GEN_SAMPLE_SITE && getSampleConfig()),
     }),
     new CopyWebpackPlugin([
       { from: path.resolve(DIR_SRC, "assets"), to: DIR_DEST, ignore: [".gitkeep"] },

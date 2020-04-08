@@ -10,11 +10,12 @@
   "scripts": {
     "build:chmodbin": "chmod +x lib/bin.js",
     "build:lib": "rm -rf lib && tsc -p tsconfig.lib.json && chmod +x ./lib/bin.js",
-    "build:template": "webpack --config webpack.prod.js",
+    "build:template": "webpack --config webpack/webpack.prod.js",
+    "build:now": "GEN_SAMPLE_SITE=1 yarn build:template",
     "build": "yarn clean && yarn build:template && yarn build:lib && yarn build:chmodbin",
-    "clean": "rm -rf assets; rm -rf lib;",
+    "clean": "rm -rf build; rm -rf lib;",
     "dev:server": "json-server --watch src/fake.json --port 1337",
-    "dev": " webpack-dev-server --config webpack.common.js",
+    "dev": " webpack-dev-server --config webpack/webpack.common.js",
     "update": "ncu -u",
     "prepublishOnly": "yarn test && yarn build",
     "test": "jest"
@@ -25,7 +26,7 @@
   },
   "author": "Igi Manaloto",
   "license": "MIT",
-  "homepage": "https://github.com/igimanaloto/linkdash#readme",
+  "homepage": "https://github.com/igimanaloto/linkdash",
   "dependencies": {
     "command-line-args": "^5.1.1",
     "command-line-usage": "^6.1.0",
@@ -60,6 +61,7 @@
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.0.4",
     "jest": "^25.2.7",
+    "js-yaml": "^3.13.1",
     "json-server": "^0.16.1",
     "match-sorter": "^4.1.0",
     "mini-css-extract-plugin": "^0.9.0",

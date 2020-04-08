@@ -1,0 +1,187 @@
+urls:
+  - title: Open Notion
+    href: https://www.notion.so/
+    group: Proj
+  - title: Open Trello
+    href: https://trello.com/
+    group: Proj
+  - title: Open JIRA Dashboard
+    href: https://jira.atlassian.com/
+    group: Proj
+  - title: View Sendinblue Dashboard
+    href: https://my.sendinblue.com
+    group: Marketing
+  - title: Open Pipedrive CRM
+    href: https://app.pipedrive.com
+    group: Marketing
+  - title: View Hubspot live messages
+    href: https://app.hubspot.com/live-messages
+    group: Mgmt
+  - title: Manage Hubspot Emails
+    href: https://app.hubspot.com/email
+    group: Mgmt
+  - title: Manage Hubspot Contacts
+    href: https://app.hubspot.com/contacts
+    group: Mgmt
+  - title: Open Atlassian Service Desk
+    href: https://www.atlassian.com/software/jira/service-desk
+    group: Proj
+  - title: View GCP deployment & build status
+    href: https://console.cloud.google.com/cloud-build/builds
+    group: Ops
+  - title: View server & web errors
+    href: https://console.cloud.google.com/errors
+    group: Ops
+  - title: View server release notes
+    href: https://console.cloud.google.com/
+    group: Ops
+  - title: Open GCP debugger
+    href: https://console.cloud.google.com/debug
+    group: Ops
+  - title: View server logs
+    href: https://console.cloud.google.com/logs/viewer
+    group: Ops
+  - title: Open GCP dashboard
+    href: https://console.cloud.google.com/
+    group: Ops
+  - title: Open cloud tasks dashboard
+    href: https://console.cloud.google.com/cloudtasks
+    group: Ops
+  - title: Manage API Credentials
+    href: https://console.cloud.google.com/apis/credentials
+    group: Ops
+  - title: Manage IAM & Permissions
+    href: https://console.cloud.google.com/iam-admin/iam
+    group: Ops
+  - title: View Google App Engine app.yaml reference
+    href: https://cloud.google.com/appengine/docs/standard/nodejs/config/appref
+    group: Ops
+  - title: Open Google Tag Manager Dashboard
+    href: https://tagmanager.google.com/
+    group: Marketing
+  - title: Open Google Analytics Dashboard
+    href: https://analytics.google.com/analytics/web
+    group: Marketing
+  - title: Manage google search console
+    href: https://search.google.com/search-console
+    group: Marketing
+  - title: Spotify - Play The Sun Always Shines on TV
+    href: spotify:track:0HoaLXRp7jJtdQFunUyUGc:autoplay:1
+    group: zChromeOnly
+  - title: Open slack
+    href: slack://open
+    group: zChromeOnly
+  - title: Open figma
+    href: "figma:"
+    group: zChromeOnly
+  - title: Open grammarly desktop
+    href: "grammarly:"
+    group: zChromeOnly
+  - title: Open IOS Maps (eew)
+    href: "map:"
+    group: zChromeOnly
+  - title: Open Musice
+    href: "music:"
+    group: zChromeOnly
+  - title: Compose email
+    href: https://mail.google.com/mail/u/0/#inbox?compose=new
+    group: zComms
+  - title: Email Support Desk
+    href: "mailto: support@linkdash.test"
+    group: zComms
+  - title: Ring Andy
+    href: "tel: +6412039221"
+    group: zComms
+  - title: iMessage someone
+    href: "messages:"
+    group: zComms
+  - title: Skype - call echo123
+    href: skype:echo123?call
+    group: zComms
+  - title: Back to VSCode
+    href: "vscode:"
+    group: Dev
+  - title: Create a pull request
+    href: https://github.com/igimanaloto/linkdash/compare?expand=1
+    group: Dev
+  - title: View active issues
+    href: https://github.com/igimanaloto/linkdash/issues
+    group: Dev
+  - title: View Zeit Now Activity
+    href: https://zeit.co/dashboard/activity
+    group: Dev
+  - title: View Zeit project status
+    href: https://zeit.co/dashboard
+    group: Dev
+  - title: Read Zeit docs
+    href: https://zeit.co/docs
+    group: Dev
+  - title: View AWS Console
+    href: https://console.aws.amazon/console/home
+    group: Dev
+  - title: Open Bitbucket
+    href: https://bitbucket.com/
+    group: Dev
+  - title: Open Gitlab
+    href: https://gitlab.com
+    group: Dev
+  - title: Open Github
+    href: https://github.com
+    group: Dev
+  - title: What's my ip?
+    href: https://www.google.com/search?q=whats+my+ip
+    group: Dev
+  - title: Create a new gist
+    href: https://gist.github.com/
+    group: Dev
+  - title: View sitemap
+    href: https://www.cnn.com/sitemaps/cnn/index.xml
+    group: Dev
+  - title: Read JFrog docs
+    href: https://jfrog.com/resource-center/
+    group: Dev
+  - title: Read the latest next.js release notes
+    href: https://github.com/zeit/next.js/releases
+    group: Dev
+  - title: Read the latest strapi release notes
+    href: https://github.com/strapi/strapi/releases
+    group: Dev
+  - title: Compare npm module trends
+    href: https://www.npmtrends.com/
+    group: Dev
+  - title: Open pypi - Python Package Index
+    href: https://pypi.org/
+    group: Dev
+  - title: Open Laravel Artisan CLI commands reference
+    href: https://laravel.com/docs/7.x/artisan
+    group: Dev
+  - title: Open Django ./manage.py reference
+    href: https://docs.djangoproject.com/en/3.0/ref/django-admin/
+    group: Dev
+  - title: View dependency size stats
+    href: https://bundlephobia.com/
+    group: Dev
+  - title: View github notifications
+    href: https://github.com/notifications/beta
+    group: Dev
+  - title: Read package.json reference
+    href: https://docs.npmjs.com/configuring-npm/package-json
+    group: Dev
+  - title: Read the news
+    href: https://cnn.com
+    group: Personal
+  - title: Open Facebook
+    href: https://facebook.com
+    group: Personal
+  - title: View trending Youtube videos
+    href: https://www.youtube.com/feed/trending
+    group: Personal
+  - title: Read Wikipedia featured articles
+    href: https://en.wikipedia.org/wiki/Wikipedia:Featured_content
+    group: Personal
+  - title: Open Google Maps
+    href: https://maps.google.com
+    group: Other
+  - title: Open product hunt
+    href: https://www.producthunt.com/
+    group: Other

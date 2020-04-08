@@ -48,7 +48,7 @@ beforeAll(() => {
   loadFile.mockImplementation(un);
   fs.readFileSync.mockReturnValue({
     toString: jest.fn().mockReturnValue(`
-    //_linkdashOptions
+    //_linkdashConfig
     <!--linkdashHead-->
     `),
   } as any);
