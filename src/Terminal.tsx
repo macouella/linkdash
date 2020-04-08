@@ -63,6 +63,7 @@ const Linkie = memo(
     title,
     href,
     isHighlighted,
+    id,
     count,
     onVisit,
   }: ILinkdashRow & {
@@ -91,7 +92,7 @@ const Linkie = memo(
       <a
         onClick={onVisit}
         ref={aRef}
-        target={href}
+        target={id}
         className={cn("search-item", {
           "search-item--active": isHighlighted,
         })}
@@ -124,7 +125,9 @@ export default function ({
   const results = useMemo(() => {
     if (rows) {
       if (filter) {
-        return matchSorter(rows, filter, { keys: ["href", "title", "group", "keywords"] });
+        return matchSorter(rows, filter, {
+          keys: ["href", "title", "group", "keywords", "catchall"],
+        });
       }
       return rows.sort(sortAlphabetical);
     }
@@ -140,9 +143,9 @@ export default function ({
         }
         return { ...old, [key]: newCount };
       });
-      if (searchEl.current) {
-        searchEl.current.focus();
-      }
+      // if (searchEl.current) {
+      //   searchEl.current.focus();
+      // }
     },
     [countStore, setCountStore, searchEl.current]
   );
@@ -192,17 +195,6 @@ export default function ({
   );
 
   useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      const target = e.target as any;
-      if (!["A", "BUTTON", "INPUT", "PRE"].includes(target.tagName)) {
-        e.preventDefault();
-        // return the focus
-        if (!searchEl.current?.disabled) {
-          searchEl.current?.focus();
-        }
-        return false;
-      }
-    };
     const handleType = (e: KeyboardEvent) => {
       if (
         !["Shift", "Meta"].includes(e.key) &&
@@ -218,10 +210,8 @@ export default function ({
       }
     };
 
-    document.addEventListener("click", handler);
     document.addEventListener("keydown", handleType);
     return () => {
-      document.removeEventListener("click", handler);
       document.addEventListener("keydown", handleType);
     };
   }, [searchEl.current]);
@@ -247,6 +237,7 @@ export default function ({
           <Linkie
             onVisit={handleVisit(x.id)}
             isHighlighted={highlightedIdx === idx}
+            id={x.id}
             {...x}
             count={countStore[x.id!]}
             key={x.id}

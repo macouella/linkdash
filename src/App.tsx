@@ -31,6 +31,7 @@ const App = function () {
         confie.urls = confie.urls.map((x) => ({
           id: snakeCase([x.group, x.title].join("_")),
           count: 0,
+          catchall: [x.group, x.title, x.keywords].join(" "),
           ...x,
         }));
         setConfig(confie);

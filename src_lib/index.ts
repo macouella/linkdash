@@ -6,7 +6,7 @@ import { ILinkdashCliOptions } from "./types";
 import validateConfig from "./validateConfig";
 export * from "./types";
 
-const TEMPLATE_BASE = path.resolve(__dirname, "../assets/index.html");
+const TEMPLATE_BASE = path.resolve(__dirname, "../build/index.html");
 
 /**
  * Builds a template with the provided options.
@@ -16,8 +16,8 @@ export const buildTemplate = (options: ILinkdashCliOptions) => {
   let template = fs.readFileSync(TEMPLATE_BASE).toString();
   const { htmlHead, ...filteredOptions } = options;
   template = template.replace(
-    "//_linkdashOptions",
-    `window.linkdashConfig = JSON.parse('${JSON.stringify(filteredOptions)}')`
+    "//_linkdashConfig",
+    `window.linkdashConfig = JSON.parse(\`${JSON.stringify(filteredOptions)}\`)`
   );
 
   template = template.replace('<meta name="linkdashHead" content=""/>', htmlHead || "");
