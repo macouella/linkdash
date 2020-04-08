@@ -9,7 +9,6 @@ const DIR_SRC = path.join(CWD, "src");
 const getSampleConfig = () => {
   const exampleConf = require("./demo.config.js")();
   const { htmlHead, ...linkdashConfig } = exampleConf;
-  console.log(linkdashConfig);
   return {
     linkdashConfig,
     htmlHead,
