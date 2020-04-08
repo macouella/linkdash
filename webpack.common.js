@@ -3,19 +3,19 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const CWD = process.cwd();
-const DIR_DIST = path.join(CWD, "dist");
+const DIR_DEST = path.join(CWD, "assets");
 const DIR_SRC = path.join(CWD, "src");
 
 const config = (env) => ({
   entry: [path.resolve(__dirname, "./src/index")],
   devServer: {
     historyApiFallback: true,
-    contentBase: DIR_DIST,
+    contentBase: DIR_DEST,
     port: 3000,
   },
   devtool: "inline-source-map",
   output: {
-    path: DIR_DIST,
+    path: DIR_DEST,
   },
   mode: env || "development",
   resolve: {
@@ -28,9 +28,10 @@ const config = (env) => ({
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(DIR_SRC, "index.html"),
-      inlineSource: ".(js|css)$", // embed all javascript and css inline
     }),
-    new CopyWebpackPlugin([{ from: path.resolve(DIR_SRC, "assets"), to: DIR_DIST }]),
+    new CopyWebpackPlugin([
+      { from: path.resolve(DIR_SRC, "assets"), to: DIR_DEST, ignore: [".gitkeep"] },
+    ]),
   ],
   module: {
     rules: [

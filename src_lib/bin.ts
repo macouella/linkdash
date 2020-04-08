@@ -3,13 +3,12 @@
 import commandLineArgs from "command-line-args";
 import commandLineUsage from "command-line-usage";
 import * as fs from "fs";
-import open from "open";
 import * as path from "path";
-import { buildTemplate, loadConfig } from ".";
+import { getFileToLoad, mergeOptions, processTemplate, validateOptions } from "./binHelpers";
 import { ILinkdashCliOptions } from "./types";
 
-const DEFAULT_FILENAME = "linkdash.html";
-const DEFAULT_CONFIG_FILE = "linkdash.config.js";
+export const DEFAULT_FILENAME = "linkdash.html";
+export const DEFAULT_CONFIG_FILE = "linkdash.config.js";
 const DEFAULT_CONFIG_PATH = path.resolve(process.cwd(), DEFAULT_CONFIG_FILE);
 const CONFIG_TEMPLATE = path.resolve(__dirname, "../init", DEFAULT_CONFIG_FILE);
 const CONFIG_COPY_PATH = path.join(process.cwd(), DEFAULT_CONFIG_FILE);
@@ -64,171 +63,42 @@ const sections = [
 const usage = commandLineUsage(sections);
 const options = commandLineArgs(optionDefinitions) as ILinkdashCliOptions;
 
-const exitInvalidFile = () => {
-  console.error(
-    `Missing urls or host in your config:
-
-// linkdash.config.js
-module.exports = async () => {
-  // if using the static urls option
-  "urls": [
-    {
-      "group": "group",
-      "title": "title",
-      "href": "href",
-      "keywords": "optional list of searchable keywords"
-    }
-  ],
-  // if using the host option
-  "host": "https://yourapi.com/x",
-}
-`.trim()
-  );
-  process.exit(1);
-};
-
-/**
- * Recursively creates directories for a specified filePath.
- */
-const ensureDirectoryExistence = (filePath: string) => {
-  const dirname = path.dirname(filePath);
-  if (fs.existsSync(dirname)) {
-    return true;
+const logHelp = (exitCode = 0) => {
+  console.log(usage);
+  if (exitCode === 0) {
+    console.log("No linkdash.config.js found. Generate one using npx linkdash --init");
   }
-  ensureDirectoryExistence(dirname);
-  fs.mkdirSync(dirname);
+
+  process.exit(exitCode);
 };
 
-/**
- * Merges cli and file-based options.
- */
-const mergeOptions = async (fileToLoad?: string) => {
-  let opts = { ...options };
-  if (fileToLoad) {
-    const fileConfig = await loadConfig(fileToLoad);
-
-    opts = {
-      ...fileConfig,
-      ...options, // flags take precedence over config file values
-    };
-
-    // When flag is specified, remove urls
-    if (options.host) {
-      delete opts.urls;
-    }
-  }
-  return opts;
-};
-
-/**
- * Saves a template to a file.
- */
-const saveFile = ({
-  output,
-  template,
-  disableOpen,
-}: {
-  output?: string;
-  template: string;
-  disableOpen?: boolean;
-}) => {
-  const outputFile =
-    output !== "text" ? path.resolve(process.cwd(), output || DEFAULT_FILENAME) : output;
-  ensureDirectoryExistence(outputFile);
-  fs.writeFileSync(outputFile, template);
-  if (!disableOpen) {
-    open(outputFile);
+const copyConfigFile = () => {
+  if (!fs.existsSync(CONFIG_COPY_PATH)) {
+    fs.copyFileSync(CONFIG_TEMPLATE, CONFIG_COPY_PATH);
+    console.log("Config file created: ", CONFIG_COPY_PATH);
+    process.exit(0);
   } else {
-    console.log("linkdash: saved to", outputFile);
-  }
-};
-
-/**
- * Validates cli options.
- */
-const validateOptions = ({ output, host, urls }: Partial<ILinkdashCliOptions>) => {
-  if (host) {
-    if (!/^https?:\/\//.test(host)) {
-      console.log("Host needs include the full protocol e.g. http://yourwebsite.com");
-      process.exit(1);
-    }
-  }
-
-  if (urls && host) {
-    console.log(urls, host);
-    console.log("Found urls and host both in the same file. Only specify one or the other.");
+    console.log("Prevented an overwrite. Delete your existing config first.");
     process.exit(1);
   }
-
-  if (output) {
-    if (!output.match(/(.html?$|text)/)) {
-      console.log("Please provide a valid html output path e.g. ./something/index.html");
-      process.exit(1);
-    }
-  }
-};
-
-/**
- * Builds a template and outputs to a file or stdout
- */
-const processTemplate = (opts: ILinkdashCliOptions) => {
-  try {
-    const template = buildTemplate(opts);
-    const { output, disableOpen } = opts;
-
-    if (output === "text") {
-      // log to console
-      console.log(template);
-    } else {
-      saveFile({
-        output,
-        template,
-        disableOpen,
-      });
-    }
-  } catch (e) {
-    exitInvalidFile();
-  }
-};
-
-/**
- * Gets a file to load.
- */
-const getFileToLoad = (configPath?: string) => {
-  const isJSExists = fs.existsSync(DEFAULT_CONFIG_PATH);
-  let fileToLoad = configPath && path.resolve(process.cwd(), configPath);
-  if (!fileToLoad && isJSExists) {
-    fileToLoad = DEFAULT_CONFIG_PATH;
-  }
-  return fileToLoad;
 };
 
 const main = async () => {
   // Immediately exit if requesting help
   if (options.help) {
-    console.log(usage);
-    process.exit(0);
+    logHelp();
   } else if (options.init) {
-    if (!fs.existsSync(CONFIG_COPY_PATH)) {
-      fs.copyFileSync(CONFIG_TEMPLATE, CONFIG_COPY_PATH);
-      console.log("Config file created: ", CONFIG_COPY_PATH);
-      process.exit(0);
-    } else {
-      console.log("Prevented an overwrite. Delete your existing config first.");
-      process.exit(1);
-    }
+    copyConfigFile();
   }
 
-  const fileToLoad = getFileToLoad(options.config);
-  const opts = await mergeOptions(fileToLoad);
+  const fileToLoad = getFileToLoad(DEFAULT_CONFIG_PATH, options.config);
+  const opts = await mergeOptions(options, fileToLoad);
   validateOptions(opts);
   const isProcessable = opts.host || fileToLoad;
   if (isProcessable) {
-    processTemplate(opts);
+    processTemplate(opts, DEFAULT_FILENAME);
   } else {
-    console.log(usage);
-    console.log("No linkdash.config.js found. Generate one using npx linkdash --init");
-    process.exit(0);
+    logHelp(0);
   }
 };
 

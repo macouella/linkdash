@@ -1,0 +1,142 @@
+import * as fs from "fs";
+import open from "open";
+import * as path from "path";
+import { buildTemplate, loadConfig } from ".";
+import { ILinkdashCliOptions } from "./types";
+
+/**
+ * Gets a file to load.
+ */
+export const getFileToLoad = (defaultValue: string, configPath?: string) => {
+  const isJSExists = fs.existsSync(defaultValue);
+  let fileToLoad = configPath && path.resolve(process.cwd(), configPath);
+  if (!fileToLoad && isJSExists) {
+    fileToLoad = defaultValue;
+  }
+  return fileToLoad;
+};
+
+/**
+ * Validates cli options.
+ */
+export const validateOptions = ({ output, host, urls }: Partial<ILinkdashCliOptions>) => {
+  if (host) {
+    if (!/^https?:\/\//.test(host)) {
+      console.log("Host needs include the full protocol e.g. http://yourwebsite.com");
+      process.exit(1);
+    }
+  }
+
+  if (urls && host) {
+    console.log(urls, host);
+    console.log("Found urls and host both in the same file. Only specify one or the other.");
+    process.exit(1);
+  }
+
+  if (output) {
+    if (!output.match(/(.html?$|text)/)) {
+      console.log("Please provide a valid html output path e.g. ./something/index.html");
+      process.exit(1);
+    }
+  }
+};
+
+/**
+ * Recursively creates directories for a specified filePath.
+ */
+export const ensureDirectoryExistence = (filePath: string) => {
+  const dirname = path.dirname(filePath);
+  if (fs.existsSync(dirname)) {
+    return true;
+  }
+  ensureDirectoryExistence(dirname);
+  fs.mkdirSync(dirname);
+};
+
+/**
+ * Merges cli and file-based options.
+ */
+export const mergeOptions = async (options: ILinkdashCliOptions, fileToLoad?: string) => {
+  let opts = { ...options };
+  if (fileToLoad) {
+    const fileConfig = await loadConfig(fileToLoad);
+
+    opts = {
+      ...fileConfig,
+      ...options, // flags take precedence over config file values
+    };
+
+    // When flag is specified, remove urls
+    if (options.host) {
+      delete opts.urls;
+    }
+  }
+  return opts;
+};
+
+export const exitInvalidFile = () => {
+  console.log(
+    `Missing urls or host in your config:
+
+// linkdash.config.js
+module.exports = async () => {
+  // if using the static urls option
+  "urls": [
+    {
+      "group": "group",
+      "title": "title",
+      "href": "href",
+      "keywords": "optional list of searchable keywords"
+    }
+  ],
+  // if using the host option
+  "host": "https://yourapi.com/x",
+}
+`.trim()
+  );
+  process.exit(1);
+};
+
+/**
+ * Saves a template to a file.
+ */
+export const logOrSaveTemplate = ({
+  output,
+  template,
+  disableOpen,
+  fallbackFilename,
+}: {
+  output?: string;
+  fallbackFilename: string;
+  template: string;
+  disableOpen?: boolean;
+}) => {
+  if (output === "text") {
+    console.log(template);
+  } else {
+    const outputFile = path.resolve(process.cwd(), output || fallbackFilename);
+    ensureDirectoryExistence(outputFile);
+    fs.writeFileSync(outputFile, template);
+    if (!disableOpen) {
+      open(outputFile);
+    }
+  }
+};
+
+/**
+ * Builds a template and outputs to a file or stdout
+ */
+export const processTemplate = (opts: ILinkdashCliOptions, fallbackFilename: string) => {
+  try {
+    const template = buildTemplate(opts);
+    const { output, disableOpen } = opts;
+    logOrSaveTemplate({
+      output,
+      template,
+      disableOpen,
+      fallbackFilename,
+    });
+  } catch (e) {
+    exitInvalidFile();
+  }
+};

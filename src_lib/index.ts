@@ -1,19 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import fs from "fs";
 import path from "path";
+import loadFile from "./loadFile";
 import { ILinkdashCliOptions } from "./types";
+import validateConfig from "./validateConfig";
 export * from "./types";
 
-const TEMPLATE_BASE = path.resolve(__dirname, "../dist/index.html");
-
-/**
- * Validates the minimum config required for a template to be built.
- */
-const validateConfig = (fileOptions: any) => {
-  if (typeof fileOptions !== "object" || !fileOptions || (!fileOptions.urls && !fileOptions.host)) {
-    throw Error("Invalid config supplied");
-  }
-};
+const TEMPLATE_BASE = path.resolve(__dirname, "../assets/index.html");
 
 /**
  * Builds a template with the provided options.
@@ -30,15 +23,6 @@ export const buildTemplate = (options: ILinkdashCliOptions) => {
   template = template.replace("<!--linkdashHead-->", htmlHead || "");
 
   return template;
-};
-
-/**
- * Loads a config file.
- */
-const loadFile = (fileToLoad: string) => {
-  fileToLoad = path.resolve(fileToLoad);
-  const file: (() => ILinkdashCliOptions) | ILinkdashCliOptions = require(fileToLoad);
-  return file;
 };
 
 /**

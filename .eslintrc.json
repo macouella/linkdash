@@ -9,7 +9,8 @@
     }
   },
   "rules": {
-    "@typescript-eslint/interface-name-prefix": [1, { "prefixWithI": "always" }]
+    "@typescript-eslint/interface-name-prefix": [1, { "prefixWithI": "always" }],
+    "@typescript-eslint/no-var-requires": "off"
   },
   "env": {
     "browser": true,

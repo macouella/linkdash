@@ -7,12 +7,13 @@ logs
 .idea
 .vscode
 
-dist
 node_modules
 
 # Built files
-dist
+assets
 lib
 ./linkdash.config.js
 ./linkdash.html
 *.tgz
+
+coverage

@@ -248,7 +248,7 @@ export default function ({
             onVisit={handleVisit(x.id)}
             isHighlighted={highlightedIdx === idx}
             {...x}
-            count={countStore[x.id]}
+            count={countStore[x.id!]}
             key={x.id}
           />
         ))}
