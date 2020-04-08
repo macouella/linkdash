@@ -1,5 +1,5 @@
 *
-!dist/index.html
+!assets/index.html
 !lib/*
 !init/*
 !package.json

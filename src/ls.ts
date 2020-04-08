@@ -9,13 +9,6 @@ try {
   console.info("using stubbed local storage");
 }
 
-export function accessor(key: string, value: any) {
-  if (arguments.length === 1) {
-    return get(key);
-  }
-  return set(key, value);
-}
-
 export function get(key: string) {
   return JSON.parse(ls.getItem(key));
 }
@@ -27,6 +20,13 @@ export function set(key: string, value: any) {
   } catch (e) {
     return false;
   }
+}
+
+export function accessor(key: string, value: any) {
+  if (arguments.length === 1) {
+    return get(key);
+  }
+  return set(key, value);
 }
 
 export function remove(key: string) {

@@ -1,5 +1,5 @@
 export interface ILinkdashRow {
-  id: string;
+  id?: string;
   title: string;
   href: string;
   group: string;

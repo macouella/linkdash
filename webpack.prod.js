@@ -1,7 +1,8 @@
 const common = require("./webpack.common.js");
 const merge = require("webpack-merge");
 
-const HtmlWebpackInlineSourcePlugin = require("html-webpack-inline-source-plugin");
+const InlineChunkHtmlPlugin = require("./InlineChunkHtmlPlugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const TerserPlugin = require("terser-webpack-plugin");
 
@@ -24,7 +25,7 @@ module.exports = merge(conf, {
   devtool: false,
 
   plugins: [
-    new HtmlWebpackInlineSourcePlugin(),
+    new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/.(js|css)$/]),
     new BundleAnalyzerPlugin({
       analyzerMode: "static",
     }),
