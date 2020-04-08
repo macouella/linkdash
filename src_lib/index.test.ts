@@ -49,7 +49,7 @@ beforeAll(() => {
   fs.readFileSync.mockReturnValue({
     toString: jest.fn().mockReturnValue(`
     //_linkdashConfig
-    <!--linkdashHead-->
+    <meta name="linkdashHead" content=""/>
     `),
   } as any);
 });
