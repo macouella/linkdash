@@ -18,18 +18,16 @@ export default (req: NowRequest, res: NowResponse) => {
   const dashboardHTML = buildTemplate({
     title: "My fruit store",
     htmlHead: "<meta name='favourite_fruit' content='apple' />",
-    urls: [
-      FRUITS_STORE.reduce<any>((acc, fruit) => {
-        const formattedFruit: ILinkdashRow = {
-          id: `fruit-${fruit.id}`,
-          title: `Search google about ${fruit.name}`,
-          group: "Fruits",
-          href: `https://www.google.com/search?q=${fruit.name}%20fruit`,
-        };
-        acc.push(formattedFruit);
-        return acc;
-      }, []),
-    ],
+    urls: FRUITS_STORE.reduce<any>((acc, fruit) => {
+      const formattedFruit: ILinkdashRow = {
+        id: `fruit-${fruit.id}`,
+        title: `Search google about ${fruit.name}`,
+        group: "Fruits",
+        href: `https://www.google.com/search?q=${fruit.name}%20fruit`,
+      };
+      acc.push(formattedFruit);
+      return acc;
+    }, []),
   });
 
   res.setHeader("Content-Type", "text/html");
