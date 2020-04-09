@@ -5,6 +5,7 @@ export interface ILinkdashRow {
   group: string;
   keywords?: string;
   count?: number;
+  isBookmarked?: boolean;
 }
 
 export interface IQueryLinkdashConfig {

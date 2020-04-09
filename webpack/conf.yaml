@@ -98,7 +98,7 @@ urls:
   - title: Skype - call echo123
     href: skype:echo123?call
     group: zComms
-  - title: Back to VSCode
+  - title: VSCode - open app
     href: "vscode:"
     group: Dev
   - title: Create a pull request
