@@ -12,7 +12,7 @@ module.exports = () => {
   const { urls } = yaml.safeLoad(conf);
 
   return {
-    title: "Welcome to my linkdash!", // title of the page
+    title: "Linkdash - Link it all in one place.", // title of the page
 
     // a list of static urls to build the linkdash list from
     urls,
