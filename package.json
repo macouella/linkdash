@@ -18,7 +18,7 @@
     "build:chmodbin": "chmod +x lib/bin.js",
     "build:lib": "rm -rf lib && tsc -p tsconfig.lib.json && chmod +x ./lib/bin.js",
     "build:template": "webpack --config webpack/webpack.prod.js",
-    "build:now": "ENABLE_AUTOMENU=1 yarn build:template && tsc -p tsconfig.lib.json && ./lib/bin.js",
+    "build:now": "ENABLE_AUTOMENU=1 yarn build:template && tsc -p tsconfig.lib.json && cp ./build/index.html template.html",
     "build": "yarn clean && yarn build:template && yarn build:lib && yarn build:chmodbin",
     "clean": "rm -rf build; rm -rf lib;",
     "dev:server": "json-server --watch src/fake.json --port 1337",
