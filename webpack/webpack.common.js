@@ -8,7 +8,7 @@ const DIR_DEST = path.join(CWD, "build");
 const DIR_SRC = path.join(CWD, "src");
 
 const getSampleConfig = () => {
-  const exampleConf = require("./demo.config.js")();
+  const exampleConf = require(path.resolve(__dirname, "../demo/demo.config.js"))();
   const { htmlHead, ...linkdashConfig } = exampleConf;
   return {
     linkdashConfig,
