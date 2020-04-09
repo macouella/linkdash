@@ -8,7 +8,7 @@ export default (req: NowRequest, res: NowResponse) => {
   } = req;
 
   if (key !== "MY_SECRET_KEY") {
-    res.status(401).json({
+    return res.status(401).json({
       status: "error",
       message: "You are not authorised to access this page.",
       statusCode: 401,
