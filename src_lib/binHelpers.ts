@@ -22,7 +22,9 @@ export const getFileToLoad = (defaultValue: string, configPath?: string) => {
 export const validateOptions = ({ output, host, urls }: Partial<ILinkdashCliOptions>) => {
   if (host) {
     if (!/^https?:\/\//.test(host)) {
-      console.log("Host needs include the full protocol e.g. http://yourwebsite.com");
+      console.log(
+        "Host needs include the full protocol e.g. https://linkdash.now.sh/api/demo-config"
+      );
       process.exit(1);
     }
   }
@@ -90,7 +92,7 @@ module.exports = async () => {
     }
   ],
   // if using the host option
-  "host": "https://yourapi.com/x",
+  "host": "https://linkdash.now.sh/api/demo-config",
 }
 `.trim()
   );
