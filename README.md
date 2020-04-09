@@ -1,4 +1,4 @@
-![Link dash](/readme_assets/linkdash.svg)
+![Link dash](https://raw.githubusercontent.com/igimanaloto/linkdash/master/readme_assets/linkdash.svg)
 
 # Linkdash
 
@@ -66,7 +66,7 @@ module.exports = async () => {
 
 ## Under the hood
 
-Linkdash simply swaps the contents of a prebuilt html file with your config. Check out the [package.json ](/package.json) to see the three depedencies it installs!
+Linkdash simply swaps the contents of a prebuilt html file with your config. Check out the [package.json ](https://github.com/igimanaloto/linkdash/blob/master/package.json) to see the three depedencies it installs!
 
 ## Happy customers
 
