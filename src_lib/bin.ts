@@ -21,14 +21,18 @@ const optionDefinitions: Array<{
   alias?: string;
   typeLabel?: string;
 }> = [
-  { name: "init", type: Boolean, description: "Creates a base config file in your project path." },
+  {
+    name: "init",
+    type: Boolean,
+    description: "Creates a linkdash config file in your project path.",
+  },
   {
     name: "config",
     type: String,
     defaultOption: true,
     description: "The path to a linkdash config",
   },
-  { name: "host", type: String, description: "A url that serves dashlink urls" },
+  { name: "host", type: String, description: "A url that responds with a linkdash-like config." },
   {
     name: "output",
     type: String,
@@ -42,15 +46,15 @@ const optionDefinitions: Array<{
 const sections = [
   {
     header: "Linkdash",
-    content: "A dashboard of links",
+    content: "Generate a handy dashboard of links in seconds.",
   },
   {
     header: "Synopsis",
     content: [
       "$ linkdash",
       "$ linkdash --init",
-      "$ linkdash --config myfile.js",
-      "$ linkdash --host http://yourcustomapi.com/urls",
+      "$ linkdash --config ./customlinkdash.config.js",
+      "$ linkdash --host https://linkdash.now.sh/api/demo-config",
       "$ linkdash {bold --help}",
     ],
   },
