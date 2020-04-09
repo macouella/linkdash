@@ -1,4 +1,4 @@
-# Template http reponse
+# Linkdash as a templated http reponse
 
 This examples available here: https://linkdash.now.sh/api/demo-html-response?key=MY_SECRET_KEY
 

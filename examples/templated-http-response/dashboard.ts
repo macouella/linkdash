@@ -32,6 +32,6 @@ export default (req: NowRequest, res: NowResponse) => {
     ],
   });
 
-  res.writeHead(200, { "Content-Type": "text/html" });
-  res.send(dashboardHTML);
+  res.setHeader("Content-Type", "text/html");
+  res.status(200).send(dashboardHTML);
 };
