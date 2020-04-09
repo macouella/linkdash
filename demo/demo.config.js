@@ -23,7 +23,7 @@ module.exports = () => {
 
     // other options
     disableOpen: false, // disables auto-opening after a build
-    output: "./index.html", // outputs the generated template to the specified path
+    output: "./public/index.html", // outputs the generated template to the specified path
 
     // injects raw html to the <head>
     htmlHead: `
