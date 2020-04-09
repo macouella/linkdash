@@ -117,7 +117,7 @@ urls:
     href: https://zeit.co/docs
     group: Dev
   - title: View AWS Console
-    href: https://console.aws.amazon/console/home
+    href: https://console.aws.amazon.com/console/home
     group: Dev
   - title: Open Bitbucket
     href: https://bitbucket.com/
