@@ -5,6 +5,7 @@ import * as React from "react";
 import { ILinkdashCliOptions, IQueryLinkdashConfig } from "../src_lib/types";
 import "./app.sass";
 import Terminal from "./Terminal";
+import words from "./words";
 
 const App = function () {
   const [config, setConfig] = React.useState<ILinkdashCliOptions>({});
@@ -26,10 +27,10 @@ const App = function () {
           confie = { ...confie, ...hostConfig.data };
         }
 
-        if (!confie.urls) throw Error("Unable to load any urls");
+        if (!confie.urls) throw Error(words.errorLoading);
 
         confie.urls = confie.urls.map((x) => ({
-          id: snakeCase([x.group, x.title].join("_")),
+          id: x.id || snakeCase([x.group, x.title].join("_")),
           count: 0,
           catchall: [x.group, x.title, x.keywords].join(" "),
           ...x,
@@ -44,9 +45,16 @@ const App = function () {
     })();
   }, []);
 
-  const loadType = config.host ? config.host.split("?")[0] : "window config";
+  const loadType = config.host ? config.host.split("?")[0] : words.typeWindowConfig;
 
-  return <Terminal loadType={loadType} isLoadingDone={isLoadingDone} rows={config.urls} />;
+  return (
+    <Terminal
+      enableAutoMenu={!!process.env.ENABLE_AUTOMENU}
+      loadType={loadType}
+      isLoadingDone={isLoadingDone}
+      rows={config.urls}
+    />
+  );
 };
 
 export default App;
