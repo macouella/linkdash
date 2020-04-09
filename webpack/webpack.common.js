@@ -30,9 +30,6 @@ const config = (env) => ({
     new HtmlWebpackPlugin({
       template: path.resolve(DIR_SRC, "index.html"),
     }),
-    new webpack.DefinePlugin({
-      "process.env.ENABLE_AUTOMENU": !!process.env.ENABLE_AUTOMENU,
-    }),
     new CopyWebpackPlugin([
       { from: path.resolve(DIR_SRC, "assets"), to: DIR_DEST, ignore: [".gitkeep"] },
     ]),

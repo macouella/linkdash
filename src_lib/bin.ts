@@ -39,6 +39,11 @@ const optionDefinitions: Array<{
     description: `The path of the generated file or {underline text} to pipe out to the terminal / stdout`.trim(),
   },
   { name: "disableOpen", type: Boolean, description: "Disable auto-opening the generated file" },
+  {
+    name: "enableAutoMenu",
+    type: Boolean,
+    description: "Enables auto-opening the dashboard menu on first visit",
+  },
   { name: "title", type: String, description: "The page title" },
   { name: "help", alias: "h", type: Boolean, description: "Print this menu" },
 ];

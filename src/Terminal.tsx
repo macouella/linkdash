@@ -153,7 +153,7 @@ export default function ({
   const searchEl = useRef<HTMLInputElement | null>(null);
   const [filter, setFilter] = useState<string>();
   const [lastAction, setLastAction] = useState<string>();
-  const [isMenuOpen, setIsMenuOpen] = useState(enableAutoMenu && !ls.get("introDone"));
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [highlightedIdx, setHighlightedIdx] = useState(0);
   const [navMode, setNavMode] = useState<"keyboard" | "mouse">("keyboard");
   const [rows, setRows] = useState<ILinkdashRow[]>();
@@ -162,6 +162,13 @@ export default function ({
     ls.set("introDone", 1);
     setIsMenuOpen(false);
   };
+
+  useEffect(() => {
+    if (enableAutoMenu && !ls.get("introDone")) {
+      setIsMenuOpen(true);
+    }
+  }, [enableAutoMenu]);
+
   useEffect(() => {
     const handle = (evt: any) => {
       if (isMenuOpen && evt.key === "Escape") {

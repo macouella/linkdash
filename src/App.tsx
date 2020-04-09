@@ -49,7 +49,7 @@ const App = function () {
 
   return (
     <Terminal
-      enableAutoMenu={!!process.env.ENABLE_AUTOMENU}
+      enableAutoMenu={config.enableAutoMenu}
       loadType={loadType}
       isLoadingDone={isLoadingDone}
       rows={config.urls}
