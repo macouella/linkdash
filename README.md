@@ -70,11 +70,11 @@ Linkdash simply swaps the contents of a prebuilt html file with your config. Che
 
 ## Happy customers
 
-<h4 align="center">
+<p align="center">
   I never thought I'd never write another personal dashboard.
   <br><br>
   Snape Livingston
-</h4>
+</p>
 
 ## Other applications
 
