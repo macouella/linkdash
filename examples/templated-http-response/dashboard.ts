@@ -1,5 +1,5 @@
 import { NowRequest, NowResponse } from "@now/node";
-import { buildTemplate, ILinkdashRow } from "../../src_lib";
+import { buildTemplate, ILinkdashRow } from "../../lib";
 import FRUITS_STORE from "./data";
 
 export default (req: NowRequest, res: NowResponse) => {
