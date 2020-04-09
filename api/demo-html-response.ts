@@ -1,3 +1,3 @@
-import dashboard from "../examples/template-http-response/dashboard";
+import dashboard from "../examples/templated-http-response/dashboard";
 
 export default dashboard;
