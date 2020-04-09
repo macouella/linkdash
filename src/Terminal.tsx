@@ -352,7 +352,15 @@ export default function ({
         <Menu closeMenu={closeMenu}>
           <h4 className="menu-title">Linkdash quickstart</h4>
           <dl className="menu-list">
-            {Object.entries(words.menuCommands).map(([dt, dd]) => {
+            {Object.entries(words.menuCommandsDesktop).map(([dt, dd]) => {
+              return (
+                <div className="d-touch-none" key={`${dt}`}>
+                  <dt>{dt}</dt>
+                  <dd>{dd}</dd>
+                </div>
+              );
+            })}
+            {Object.entries(words.menuCommandsCommon).map(([dt, dd]) => {
               return (
                 <div key={`${dt}`}>
                   <dt>{dt}</dt>
