@@ -1,4 +1,4 @@
-![Link dash](https://raw.githubusercontent.com/igimanaloto/linkdash/master/readme_assets/linkdash.svg)
+![Linkdash](https://raw.githubusercontent.com/igimanaloto/linkdash/master/readme_assets/linkdash.png)
 
 # Linkdash
 
