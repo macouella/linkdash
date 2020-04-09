@@ -99,7 +99,7 @@ body
     padding-left: 1rem
     .button
       height: 100%
-      width: 8rem
+      width: 6rem
       border: 2px solid black
   .mid
     padding-top: 4rem
@@ -209,7 +209,8 @@ body
     padding-left: 1.25rem
     display: block
     box-sizing: content-box
-    visibility: hidden
+    +desktop
+      visibility: hidden
   .search-item-bookmark--active
     fill: currentColor
     visibility: visible
@@ -237,6 +238,8 @@ body
   .menu-content
     position: relative
     z-index: 2
+    margin-left: 1rem
+    margin-right: 1rem
     padding: 1rem
     background: white
     border: 2px solid black
