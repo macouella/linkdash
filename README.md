@@ -80,6 +80,7 @@ Linkdash simply swaps the contents of a prebuilt html file with your config. Che
 
 ## Other applications
 
+- Always finding yourself trying to remember things to do after a git push or server deploy? Use linkdash along-side githooks.
 - Smart url schemas exist everywhere, from `mailto:`, to `tel:` to app-specific calls like `skype:`, `spotify:` and `slack:`. Get creative!
 - If security and collaboration is required, you may utilise the `buildTemplate` helper in your favourite http kernel `express`, `http` or `serverless function`. That way, you can decide which authorization approach to secure your links dashboard with.
 - Feel free to fork to customise the html for your needs. (webpack / react / ts)
