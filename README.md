@@ -87,4 +87,5 @@ Linkdash simply swaps the contents of a prebuilt html file with your config. Che
 
 ## Future plans
 
+[ ] Add manifest.json capabilities so the file can be installed in mobile devices.
 [ ] Add a --spreadsheet option to read off Google sheets.
