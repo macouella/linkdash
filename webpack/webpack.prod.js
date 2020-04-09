@@ -30,5 +30,5 @@ module.exports = merge(conf, {
       new BundleAnalyzerPlugin({
         analyzerMode: "static",
       }),
-  ].filter(boolean),
+  ].filter(Boolean),
 });
