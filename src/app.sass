@@ -3,12 +3,26 @@ $grey-9: #909090
 $grey-d: #dadada
 $grey-f: #f1f1f1
 
+=touch
+  @media screen and (max-width: 1023px)
+    @content
+=desktop
+  @media screen and (min-width: 1024px)
+    @content
+
+html
+  font-size: 18px
 body
   margin: 0
-  font-size: 18px
   font-size: 1rem
   line-height: 1.6
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+
 .terminal
   padding: 1rem
   box-sizing: border-box
@@ -100,8 +114,10 @@ body
   .search-item
     display: flex
     align-items: flex-start
-    line-height: 1
-    padding: 0.4rem 0.5rem
+    padding: 0.15rem 0 0.25rem 0.5rem
+    +touch
+      padding-top: 0.3rem
+      padding-bottom: 0.4rem
     .terminal:not(.terminal--mouse) &:hover, &.search-item--active
       background: black
       color: white
@@ -111,24 +127,28 @@ body
         stroke: currentColor
 
   .search-item-name
-    display: inline-flex
-    margin-right: auto
-    padding-right: 1rem
-    line-height: 1.2
+    display: block
+    flex: 1
+    font-size: 0.9rem
+    padding-left: 1rem
   .search-item-group, .search-item-count
-    padding-top: 0.2rem
     font-weight: 500
-    display: inline-flex
-    font-size: 0.8em
+    display: block
+    padding-top: 0.1rem
+    font-size: 0.8rem
     text-transform: uppercase
     color: $grey-9
 
   .search-item-group
-    margin-right: 1rem
-    min-width: 6.5rem
+    width: 5rem
+    white-space: nowrap
+    text-overflow: ellipsis
+    overflow: hidden
+    display: block
 
   .search-item-count
-    margin-left: 0.2rem
+    margin-left: auto
+    padding-left: 1rem
 
   .toolbar
     position: fixed
@@ -160,15 +180,6 @@ body
   .top
     position: relative
 
-
-  @keyframes spin
-    0%
-      transform: rotate(0deg)
-    100%
-      transform: rotate(360deg)
-
-
-
   .loader-wrap
     text-align: center
     padding-top: 1rem
@@ -187,68 +198,74 @@ body
   pre
     background: $grey-f
     padding: 1rem
-.search-item-bookmark
-  height: 1rem
-  padding-top: 0.1rem
-  width: 1rem
-  fill: none
-  color: $grey-d
-  stroke: currentColor
-  padding-right: 0.25rem
-  padding-left: 1.25rem
-  display: block
-  box-sizing: content-box
-  visibility: hidden
-.search-item-bookmark--active
-  fill: currentColor
-  visibility: visible
+  .search-item-bookmark
+    height: 1.1rem
+    width: 1.1rem
+    padding-top: 0.2rem
+    fill: none
+    color: $grey-d
+    stroke: currentColor
+    padding-right: 0.25rem
+    padding-left: 1.25rem
+    display: block
+    box-sizing: content-box
+    visibility: hidden
+  .search-item-bookmark--active
+    fill: currentColor
+    visibility: visible
 
-.menu
-  height: 100vh
-  width: 100%
-  position: fixed
-  background: rgba(#fff, 0.7)
-  display: flex
-  align-items: center
-  justify-content: center
-  overflow: hidden
-  z-index: 3
-.menu-back
-  height: 100%
-  position: absolute
-  z-index: 1
-  top: 0
-  left: 0
-  height: 100%
-  width: 100%
-.menu-content
-  position: relative
-  z-index: 2
-  padding: 1.25rem
-  background: white
-  border: 2px solid black
-  width: 100%
-  max-width: 25rem
-.menu-list
-  list-style-type: none
-  padding: 0
-  margin: 0
-  > div
+  .menu
+    height: 100vh
+    top: 0
+    left: 0
     width: 100%
+    position: fixed
+    background: rgba(#fff, 0.7)
     display: flex
-    flex-wrap: wrap
-  dt
-    width: 30%
-  dd
-    width: 70%
-    padding-left: 0.5rem
-  dt, dd
-    margin: 0
-  margin-bottom: 1rem
-.menu-title
-  margin-top: 0
-  font-size: 1.25rem
-  margin-bottom: 0
-.buttons
-  .button:not(:last-child)
-    margin-right: 0.5rem
+    align-items: center
+    justify-content: center
+    overflow: hidden
+    z-index: 3
+  .menu-back
+    height: 100%
+    position: absolute
+    z-index: 1
+    top: 0
+    left: 0
+    height: 100%
+    width: 100%
+  .menu-content
+    position: relative
+    z-index: 2
+    padding: 1rem
+    background: white
+    border: 2px solid black
+    width: 100%
+    max-width: 24rem
+  .menu-list
+    list-style-type: none
+    padding: 0
+    margin-top: 0
+    margin-bottom: 2rem
+    > div
+      width: 100%
+      display: flex
+      flex-wrap: wrap
+    dt
+      width: 30%
+    dd
+      width: 70%
+      padding-left: 0.5rem
+    dt, dd
+      margin: 0
+  .menu-title
+    margin-top: 0
+    font-size: 1.25rem
+    margin-bottom: 1.5rem
+  .buttons
+    .button:not(:last-child)
+      margin-right: 0.5rem
+
+  .d-touch-none
+    +touch
+      display: none !important

@@ -26,10 +26,12 @@ export default {
 }
 `.trim(),
   menu: "menu",
-  menuCommands: {
+  menuCommandsDesktop: {
     "[arrow keys]": "navigate",
     "[enter]": "open a link",
     "[space]": "bookmark a link",
+  },
+  menuCommandsCommon: {
     "#b": "show bookmarks",
     "#t": "show top commands",
   },
