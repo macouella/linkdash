@@ -26,8 +26,9 @@ module.exports = merge(conf, {
 
   plugins: [
     new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/.(js|css)$/]),
-    new BundleAnalyzerPlugin({
-      analyzerMode: "static",
-    }),
-  ],
+    !!process.env.ANALYZE &&
+      new BundleAnalyzerPlugin({
+        analyzerMode: "static",
+      }),
+  ].filter(boolean),
 });
