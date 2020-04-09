@@ -7,15 +7,6 @@ const CWD = process.cwd();
 const DIR_DEST = path.join(CWD, "build");
 const DIR_SRC = path.join(CWD, "src");
 
-const getSampleConfig = () => {
-  const exampleConf = require(path.resolve(__dirname, "../demo/demo.config.js"))();
-  const { htmlHead, ...linkdashConfig } = exampleConf;
-  return {
-    linkdashConfig,
-    htmlHead,
-  };
-};
-
 const config = (env) => ({
   entry: [path.resolve(DIR_SRC, "index")],
   devServer: {
@@ -38,7 +29,6 @@ const config = (env) => ({
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(DIR_SRC, "index.html"),
-      ...(process.env.GEN_SAMPLE_SITE && getSampleConfig()),
     }),
     new webpack.DefinePlugin({
       "process.env.ENABLE_AUTOMENU": !!process.env.ENABLE_AUTOMENU,
