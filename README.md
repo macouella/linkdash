@@ -1,4 +1,4 @@
-![Link dash](/readme_assets/logo.svg)
+![Link dash](/readme_assets/linkdash.svg)
 
 # Linkdash
 
