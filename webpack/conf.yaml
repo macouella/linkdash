@@ -71,16 +71,16 @@ urls:
   - title: Open slack
     href: slack://open
     group: zChromeOnly
-  - title: Open figma
+  - title: Open Figma
     href: "figma:"
     group: zChromeOnly
-  - title: Open grammarly desktop
+  - title: Open Grammarly desktop
     href: "grammarly:"
     group: zChromeOnly
   - title: Open IOS Maps (eew)
     href: "map:"
     group: zChromeOnly
-  - title: Open Musice
+  - title: Open Music
     href: "music:"
     group: zChromeOnly
   - title: Compose email
@@ -161,7 +161,7 @@ urls:
   - title: View dependency size stats
     href: https://bundlephobia.com/
     group: Dev
-  - title: View github notifications
+  - title: View Github notifications
     href: https://github.com/notifications/beta
     group: Dev
   - title: Read package.json reference
