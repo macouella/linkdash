@@ -12,6 +12,8 @@ Visit https://linkdash.now.sh or try it locally!
 npx linkdash --host https://linkdash.now.sh/api/demo-config
 ```
 
+![Linkdash demo](https://raw.githubusercontent.com/igimanaloto/linkdash/master/readme_assets/demo.gif)
+
 ## Why?
 
 On a personal level, you might want a quick way to <s>build</s> browse through your important links.
