@@ -9,5 +9,7 @@ export default (req: NowRequest, res: NowResponse) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-  res.status(200).send(demoConfig);
+  const { htmlHead, ...config } = demoConfig;
+
+  res.status(200).send(config);
 };
