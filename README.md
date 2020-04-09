@@ -60,8 +60,10 @@ module.exports = async () => {
     disableOpen: false,
     output: "./linkdash.html",
     htmlHead: `
-      <meta name="robots" content="noindex" />
+    <meta name="robots" content="noindex" />
     `.trim(),
+    // automatically opens the menu
+    enableAutoMenu: false,
   };
 };
 ```

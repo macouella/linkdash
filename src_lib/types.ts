@@ -21,4 +21,5 @@ export interface ILinkdashCliOptions extends IQueryLinkdashConfig {
   disableOpen?: boolean;
   init?: boolean;
   urls?: ILinkdashRow[];
+  enableAutoMenu?: boolean;
 }
