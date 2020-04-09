@@ -12,8 +12,8 @@ node_modules
 # Built files
 build
 lib
-./linkdash.config.js
-./linkdash.html
+/linkdash.config.js
+/linkdash.html
 *.tgz
 
 coverage
