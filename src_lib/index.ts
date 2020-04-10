@@ -2,16 +2,15 @@
 import fs from "fs";
 import path from "path";
 import loadFile from "./loadFile";
-import { ILinkdashCliOptions } from "./types";
+import { IBuildTemplateOptions } from "./types";
 import validateConfig from "./validateConfig";
-export * from "./types";
 
 const TEMPLATE_BASE = path.resolve(__dirname, "../build/index.html");
 
 /**
  * Builds a template with the provided options.
  */
-export const buildTemplate = (options: ILinkdashCliOptions) => {
+export const buildTemplate = (options: IBuildTemplateOptions) => {
   validateConfig(options);
   let template = fs.readFileSync(TEMPLATE_BASE).toString();
   const { htmlHead, ...filteredOptions } = options;
@@ -26,25 +25,25 @@ export const buildTemplate = (options: ILinkdashCliOptions) => {
 };
 
 /**
- * Loads and runs a given file if it is a function.
+ * Loads and runs a given config file if it is a function.
  */
 export const loadConfig = async (fileToLoad: string) => {
   const file = loadFile(fileToLoad);
   if (typeof file === "function") {
     return file();
-  } else {
-    return file;
   }
+  return file;
 };
 
 /**
- * Loads and synchronously runs a given file if it is a function.
+ * Loads and synchronously runs a given config file if it is a function.
  */
 export const loadConfigSync = (fileToLoad: string) => {
   const file = loadFile(fileToLoad);
-  let fileOptions = file as ILinkdashCliOptions;
-  if (typeof file === "function") fileOptions = file();
-  return fileOptions;
+  if (typeof file === "function") {
+    return file();
+  }
+  return file;
 };
 
 /**
@@ -62,3 +61,5 @@ export const buildTemplateFromConfigFile = async (fileToLoad: string) => {
   const fileOptions = await loadConfig(fileToLoad);
   return buildTemplate(fileOptions);
 };
+
+export * from "./types";

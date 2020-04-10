@@ -8,6 +8,11 @@ module.exports = async () => {
         title: "Visit Github",
         href: "https://github.com",
         group: "Site",
+
+        // optional attributes
+        keywords: "additional searchable text to improve searchability",
+        id: "generated_id_to_tag_href_target_names",
+        isBookmarked: false, // bookmarks the link by default
       },
     ],
     // [OR]
@@ -20,6 +25,6 @@ module.exports = async () => {
     <meta name="robots" content="noindex" />
     `.trim(),
     // automatically opens the menu
-    enableAutoMenu: true,
+    enableAutoMenu: false,
   };
 };
