@@ -8,18 +8,31 @@ export interface ILinkdashRow {
   isBookmarked?: boolean;
 }
 
-export interface IQueryLinkdashConfig {
+export interface IBaseLinkdashConfig {
+  enableAutoMenu?: boolean;
   host?: string;
   title?: string;
+  urls?: ILinkdashRow[];
 }
 
-export interface ILinkdashCliOptions extends IQueryLinkdashConfig {
+// Options passed through a config file
+export interface ILinkdashFileConfig extends IBaseLinkdashConfig {
   htmlHead?: string;
-  help?: string;
   output?: string | "text";
-  config?: string;
   disableOpen?: boolean;
-  init?: boolean;
-  urls?: ILinkdashRow[];
-  enableAutoMenu?: boolean;
 }
+
+export type ILinkdashFileConfigFn = () => ILinkdashFileConfig;
+
+export type ILinkdashCliMergedOptions = ILinkdashFileConfig & {
+  config?: string;
+  help?: string;
+  init?: boolean;
+};
+
+// Options passed through the cli
+export type ILinkdashCliArgs = Omit<ILinkdashCliMergedOptions, "urls" | "htmlHead">;
+
+export type IBuildTemplateOptions = Omit<ILinkdashFileConfig, "output" | "disableOpen">;
+
+export type ILinkdashHostConfig = Omit<ILinkdashFileConfig, "output">;

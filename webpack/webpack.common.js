@@ -1,11 +1,22 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const webpack = require("webpack");
 
 const CWD = process.cwd();
 const DIR_DEST = path.join(CWD, "build");
 const DIR_SRC = path.join(CWD, "src");
+
+const loadConfig = () => {
+  const { htmlHead, ...linkdashConfig } = require(path.resolve(
+    __dirname,
+    "../site/demo/demo.config.js"
+  ))();
+
+  return {
+    htmlHead,
+    linkdashConfig,
+  };
+};
 
 const config = (env) => ({
   entry: [path.resolve(DIR_SRC, "index")],
@@ -20,7 +31,10 @@ const config = (env) => ({
   },
   mode: env || "development",
   resolve: {
-    // modules: [path.resolve("node_modules"), "node_modules"],
+    alias: {
+      react: "preact/compat",
+      "react-dom": "preact/compat",
+    },
     extensions: [".js", ".jsx", ".tsx", ".ts"],
   },
   performance: {
@@ -29,6 +43,7 @@ const config = (env) => ({
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(DIR_SRC, "index.html"),
+      ...(process.env.LOAD_DEMO_CONFIG && loadConfig()),
     }),
     new CopyWebpackPlugin([
       { from: path.resolve(DIR_SRC, "assets"), to: DIR_DEST, ignore: [".gitkeep"] },
@@ -39,7 +54,14 @@ const config = (env) => ({
       { test: /\.(j|t)sx?$/, exclude: /node_modules/, loader: "babel-loader" },
       {
         test: /\.s[ac]ss$/i,
-        use: ["style-loader", "css-loader", "sass-loader"].filter(Boolean),
+        use: [
+          {
+            loader: "style-loader",
+            options: { injectType: "singletonStyleTag" },
+          },
+          "css-loader",
+          "sass-loader",
+        ].filter(Boolean),
       },
       {
         test: /\.(png|svg|jpg|gif|pdf)$/,
