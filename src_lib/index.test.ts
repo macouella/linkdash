@@ -1,4 +1,5 @@
 import * as _fs from "fs";
+import jsesc from "jsesc";
 import { mocked } from "ts-jest/utils";
 import { buildTemplate, loadConfig, loadConfigSync } from "./index";
 import _loadFile from "./loadFile";
@@ -96,7 +97,13 @@ describe("buildTemplate", () => {
     };
     const { htmlHead, ...injectable } = opts;
     const result = buildTemplate(opts);
-    expect(result).toContain(JSON.stringify(injectable));
+    const escaped = jsesc(injectable as any, {
+      isScriptContext: true,
+      json: true,
+      // For testing - turn the escaped object into a string
+      wrap: true,
+    });
+    expect(result).toContain(escaped);
     expect(result).toContain(htmlHead);
   });
 });

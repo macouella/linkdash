@@ -1257,6 +1257,11 @@
     jest-diff "^25.2.1"
     pretty-format "^25.2.1"
 
+"@types/jsesc@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@types/jsesc/-/jsesc-2.5.0.tgz#40e2de0f4f0e292f172589e75cfb17b6a6db09c4"
+  integrity sha512-rhKX1CpHA4NH3H/tXpuHAOLCIrJOV6Dm2rtv5J4jQt9tJ801+IIz9yhj2lHl/m5l7NCS94pODN7kLeAcqEaq/g==
+
 "@types/json-schema@^7.0.3":
   version "7.0.4"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.4.tgz#38fd73ddfd9b55abb1e1b2ed578cb55bd7b7d339"
@@ -5713,6 +5718,11 @@ jsesc@^2.5.1:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-2.5.2.tgz#80564d2e483dacf6e8ef209650a67df3f0c283a4"
   integrity sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==
+
+jsesc@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-3.0.1.tgz#0e10205322721c22716cd5bbdbf80e71fb9c8344"
+  integrity sha512-w+MMxnByppM4jwskitZotEtvtO3a2C7WOz31NxJToGisHuysCAQQU7umb/pA/6soPFe8LGjXFEFbuPuLEPm7Ag==
 
 jsesc@~0.5.0:
   version "0.5.0"
