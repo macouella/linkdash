@@ -124,10 +124,10 @@ js-yaml@^3.13.1:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
-linkdash@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/linkdash/-/linkdash-0.0.1.tgz#6153b5a6cd38c549757a775cb7414146b553530d"
-  integrity sha512-60d/DgonqHzAPVTilz17IZZCzsLU3tC3KAw6M6eyDoeKg8hj0TNsGe2Z2ihc7QJHz65kPlthdo10DAkd+WyvCw==
+linkdash@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/linkdash/-/linkdash-0.0.3.tgz#6c838fd8c52c9ec0dc82ec111a379327b0c47629"
+  integrity sha512-dvrftvI+1Xf2qLIrFM5QLi/6n4voneFNPOJNAIbvzXfbgxDh558evGDw0CRglAeFUh73ZkAJSFdRH/PSbQ1HDA==
   dependencies:
     command-line-args "^5.1.1"
     command-line-usage "^6.1.0"
