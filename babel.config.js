@@ -15,10 +15,10 @@ module.exports = {
     [
       "@babel/preset-react",
       {
-        pragma: "h", // default pragma is React.createElement (only in classic runtime)
-        pragmaFrag: "Fragment", // default is React.Fragment (only in classic runtime)
+        pragma: "h",
+        pragmaFrag: "Fragment",
       },
     ],
   ],
-  plugins: ["@babel/plugin-transform-runtime"],
+  plugins: [],
 };
