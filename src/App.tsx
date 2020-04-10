@@ -29,7 +29,6 @@ const App = function () {
         if (!confie.urls) throw Error(words.errorLoading);
 
         confie.urls = confie.urls.map((x) => {
-          console.log([x.group, x.title].join("_"));
           return {
             id:
               x.id ||

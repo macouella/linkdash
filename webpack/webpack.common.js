@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const jsesc = require("jsesc");
 
 const CWD = process.cwd();
 const DIR_DEST = path.join(CWD, "build");
@@ -12,9 +13,14 @@ const loadConfig = () => {
     "../site/demo/demo.config.js"
   ))();
 
+  const escaped = jsesc(linkdashConfig, {
+    isScriptContext: true,
+    json: true,
+  });
+
   return {
     htmlHead,
-    linkdashConfig,
+    linkdashConfig: escaped,
   };
 };
 
