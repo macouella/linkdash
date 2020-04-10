@@ -164,6 +164,10 @@ export default function ({
     setIsMenuOpen(false);
   };
 
+  const openMenu = () => {
+    setIsMenuOpen(true);
+  };
+
   useEffect(() => {
     if (enableAutoMenu && !ls.get("introDone")) {
       setIsMenuOpen(true);
@@ -346,6 +350,36 @@ export default function ({
     [setHighlightedIdx, setLastAction, setNavMode]
   );
 
+  const handleInputChange: h.JSX.KeyboardEventHandler<HTMLInputElement> = useCallback(
+    (e) => {
+      if (!!e.currentTarget.value.trim()) {
+        setFilter(e.currentTarget.value);
+      } else {
+        e.preventDefault();
+        e.currentTarget.value = "";
+        setFilter(undefined);
+      }
+    },
+    [setFilter]
+  );
+
+  const handleReset = useCallback(() => {
+    setUiStore((uiStore) =>
+      Object.entries(uiStore).reduce((acc, [k, v]) => {
+        acc[k] = {
+          ...v,
+          count: 0,
+        };
+        return acc;
+      }, {} as any)
+    );
+    closeMenu();
+  }, []);
+
+  const handleMouseLeave = () => {
+    setNavMode("keyboard");
+  };
+
   const isDisplayCantLoad = isLoadingDone && !rows;
   const isDisplayNothing = results && !results.length;
 
@@ -354,9 +388,7 @@ export default function ({
       className={cn("terminal", {
         "terminal--mouse": navMode === "mouse",
       })}
-      onMouseLeave={() => {
-        setNavMode("keyboard");
-      }}
+      onMouseLeave={handleMouseLeave}
     >
       {isMenuOpen && (
         <Menu closeMenu={closeMenu}>
@@ -380,31 +412,10 @@ export default function ({
             })}
           </dl>
           <div className="buttons">
-            <button
-              onClick={() => {
-                closeMenu();
-              }}
-              type="button"
-              className="button button--dark"
-            >
+            <button onClick={closeMenu} type="button" className="button button--dark">
               {words.menuClose}
             </button>
-            <button
-              className="button"
-              type="button"
-              onClick={() => {
-                setUiStore((uiStore) =>
-                  Object.entries(uiStore).reduce((acc, [k, v]) => {
-                    acc[k] = {
-                      ...v,
-                      count: 0,
-                    };
-                    return acc;
-                  }, {} as any)
-                );
-                closeMenu();
-              }}
-            >
+            <button className="button" type="button" onClick={handleReset}>
               {words.reset}
             </button>
           </div>
@@ -418,19 +429,12 @@ export default function ({
             placeholder={words.searchPlaceholder}
             autoFocus
             className="input-search"
-            onChange={(e) => {
-              setFilter(e.currentTarget.value);
-            }}
+            onChange={handleInputChange as any}
             disabled={isLoadingDone && !rows}
           />
         </div>
         <div className="topbar-right">
-          <button
-            className="button"
-            onClick={() => {
-              setIsMenuOpen(true);
-            }}
-          >
+          <button className="button" onClick={openMenu}>
             {words.menu}
           </button>
         </div>
