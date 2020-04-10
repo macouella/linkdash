@@ -2,7 +2,7 @@ import * as fs from "fs";
 import open from "open";
 import * as path from "path";
 import { buildTemplate, loadConfig } from ".";
-import { ILinkdashCliOptions } from "./types";
+import { ILinkdashCliMergedOptions } from "./types";
 
 /**
  * Gets a file to load.
@@ -19,7 +19,7 @@ export const getFileToLoad = (defaultValue: string, configPath?: string) => {
 /**
  * Validates cli options.
  */
-export const validateOptions = ({ output, host, urls }: Partial<ILinkdashCliOptions>) => {
+export const validateOptions = ({ output, host, urls }: Partial<ILinkdashCliMergedOptions>) => {
   if (host) {
     if (!/^https?:\/\//.test(host)) {
       console.log(
@@ -58,7 +58,7 @@ export const ensureDirectoryExistence = (filePath: string) => {
 /**
  * Merges cli and file-based options.
  */
-export const mergeOptions = async (options: ILinkdashCliOptions, fileToLoad?: string) => {
+export const mergeOptions = async (options: ILinkdashCliMergedOptions, fileToLoad?: string) => {
   let opts = { ...options };
   if (fileToLoad) {
     const fileConfig = await loadConfig(fileToLoad);
@@ -128,7 +128,7 @@ export const logOrSaveTemplate = ({
 /**
  * Builds a template and outputs to a file or stdout
  */
-export const processTemplate = (opts: ILinkdashCliOptions, fallbackFilename: string) => {
+export const processTemplate = (opts: ILinkdashCliMergedOptions, fallbackFilename: string) => {
   try {
     const template = buildTemplate(opts);
     const { output, disableOpen } = opts;

@@ -5,7 +5,7 @@ import commandLineUsage from "command-line-usage";
 import * as fs from "fs";
 import * as path from "path";
 import { getFileToLoad, mergeOptions, processTemplate, validateOptions } from "./binHelpers";
-import { ILinkdashCliOptions } from "./types";
+import { ILinkdashCliArgs } from "./types";
 
 export const DEFAULT_FILENAME = "linkdash.html";
 export const DEFAULT_CONFIG_FILE = "linkdash.config.js";
@@ -14,7 +14,7 @@ const CONFIG_TEMPLATE = path.resolve(__dirname, "../init", DEFAULT_CONFIG_FILE);
 const CONFIG_COPY_PATH = path.join(process.cwd(), DEFAULT_CONFIG_FILE);
 
 const optionDefinitions: Array<{
-  name: keyof ILinkdashCliOptions;
+  name: keyof ILinkdashCliArgs;
   type?: typeof String | typeof Boolean;
   defaultOption?: boolean;
   description: string;
@@ -70,7 +70,7 @@ const sections = [
 ];
 
 const usage = commandLineUsage(sections);
-const options = commandLineArgs(optionDefinitions) as ILinkdashCliOptions;
+const options = commandLineArgs(optionDefinitions) as ILinkdashCliArgs;
 
 const logHelp = (exitCode = 0) => {
   console.log(usage);

@@ -1,19 +1,19 @@
-import axios from "axios";
 import { snakeCase } from "change-case";
-import qs from "qs";
-import * as React from "react";
-import { ILinkdashCliOptions, IQueryLinkdashConfig } from "../src_lib/types";
+import { h } from "preact";
+import { useEffect, useState } from "preact/hooks";
+import { parse } from "querystringify";
+import { IBaseLinkdashConfig } from "../src_lib/types";
 import "./app.sass";
 import Terminal from "./Terminal";
 import words from "./words";
 
 const App = function () {
-  const [config, setConfig] = React.useState<ILinkdashCliOptions>({});
-  const [isLoadingDone, setIsLoadingDone] = React.useState<boolean>(false);
-  React.useEffect(() => {
+  const [config, setConfig] = useState<IBaseLinkdashConfig>({});
+  const [isLoadingDone, setIsLoadingDone] = useState<boolean>(false);
+  useEffect(() => {
     (async () => {
-      const windowConfig: ILinkdashCliOptions = (window as any).linkdashConfig || {};
-      const qu: IQueryLinkdashConfig = qs.parse(location.search.slice(1));
+      const windowConfig: IBaseLinkdashConfig = (window as any).linkdashConfig || {};
+      const qu: IBaseLinkdashConfig = parse(location.search.slice(1));
       let confie = { ...windowConfig, ...qu };
       const host = confie.host;
 
@@ -23,8 +23,8 @@ const App = function () {
 
       try {
         if (host) {
-          const hostConfig = await axios.get<ILinkdashCliOptions>(host);
-          confie = { ...confie, ...hostConfig.data };
+          const hostConfig: IBaseLinkdashConfig = await fetch(host).then((res) => res.json());
+          confie = { ...confie, ...hostConfig };
         }
 
         if (!confie.urls) throw Error(words.errorLoading);

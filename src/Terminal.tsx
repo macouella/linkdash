@@ -1,7 +1,8 @@
 import cn from "classnames";
 import matchSorter from "match-sorter";
-import * as React from "react";
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { h } from "preact";
+import { memo } from "preact/compat";
+import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks";
 import { ILinkdashRow } from "../src_lib/types";
 import ls from "./ls";
 import words from "./words";
@@ -10,7 +11,7 @@ const GLOBAL_KEYS = ["Enter", "ArrowDown", "Tab", "ArrowDown", "Shift", "Meta"];
 
 const Nothing = () => <p>{words.nothing}</p>;
 
-const Menu = ({ children, closeMenu }: { closeMenu: any; children: React.ReactNode }) => {
+const Menu = ({ children, closeMenu }: { closeMenu: any; children: preact.ComponentChildren }) => {
   return (
     <div className="menu">
       <div className="menu-back" onClick={closeMenu}></div>
@@ -151,12 +152,12 @@ export default function ({
   >(ls.get("uiStore") || {});
 
   const searchEl = useRef<HTMLInputElement | null>(null);
-  const [filter, setFilter] = useState<string>();
-  const [lastAction, setLastAction] = useState<string>();
+  const [filter, setFilter] = useState<string | undefined>(undefined);
+  const [lastAction, setLastAction] = useState<string | undefined>(undefined);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [highlightedIdx, setHighlightedIdx] = useState(0);
   const [navMode, setNavMode] = useState<"keyboard" | "mouse">("keyboard");
-  const [rows, setRows] = useState<ILinkdashRow[]>();
+  const [rows, setRows] = useState<ILinkdashRow[] | undefined>(undefined);
 
   const closeMenu = () => {
     ls.set("introDone", 1);
@@ -223,7 +224,7 @@ export default function ({
   );
 
   const handleAction = useCallback(
-    (key) => (evt?: any) => {
+    (key: string) => (evt?: any) => {
       if (evt) {
         if (
           evt.target &&
@@ -263,10 +264,10 @@ export default function ({
   const selectedRow = results && results[highlightedIdx];
 
   const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
+    (e: KeyboardEvent) => {
       if (GLOBAL_KEYS.includes(e.key)) e.preventDefault();
       if (e.key === "Enter" && selectedRow) {
-        handleAction(selectedRow.id)();
+        handleAction(selectedRow.id!)();
         window.open(selectedRow.href, selectedRow.href);
       } else if (e.key === " " && selectedRow && lastAction === "move") {
         toggleBookmark(selectedRow.id!);
@@ -295,8 +296,8 @@ export default function ({
         setNavMode("keyboard");
         setLastAction("search");
       } else {
-        if (!searchEl.current?.disabled) {
-          searchEl.current?.focus();
+        if (searchEl.current && !searchEl.current.disabled) {
+          searchEl.current.focus();
           setHighlightedIdx(0);
           setNavMode("keyboard");
           setLastAction("search");
@@ -314,10 +315,12 @@ export default function ({
         !e.shiftKey &&
         !e.altKey &&
         !e.metaKey &&
-        searchEl.current?.className != document.activeElement?.className
+        searchEl.current &&
+        document.activeElement &&
+        searchEl.current.className !== document.activeElement.className
       ) {
-        if (!searchEl.current?.disabled) {
-          searchEl.current?.focus();
+        if (!searchEl.current.disabled) {
+          searchEl.current.focus();
         }
       } else if (e.key === "Escape" && isMenuOpen) {
         closeMenu();
