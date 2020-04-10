@@ -1,4 +1,3 @@
-import { snakeCase } from "change-case";
 import { h } from "preact";
 import { useEffect, useState } from "preact/hooks";
 import { parse } from "querystringify";
@@ -29,12 +28,20 @@ const App = function () {
 
         if (!confie.urls) throw Error(words.errorLoading);
 
-        confie.urls = confie.urls.map((x) => ({
-          id: x.id || snakeCase([x.group, x.title].join("_")),
-          count: 0,
-          catchall: [x.group, x.title, x.keywords].join(" "),
-          ...x,
-        }));
+        confie.urls = confie.urls.map((x) => {
+          console.log([x.group, x.title].join("_"));
+          return {
+            id:
+              x.id ||
+              [x.group, x.title]
+                .join(" ")
+                .match(/[a-zA-Z0-9]+/g)!
+                .join("_"),
+            count: 0,
+            catchall: [x.group, x.title, x.keywords].join(" "),
+            ...x,
+          };
+        });
         setConfig(confie);
       } catch (e) {
         setConfig({ host });

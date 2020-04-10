@@ -1,14 +1,21 @@
 {
-  "name": "site",
+  "name": "linkdash-site",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build:now": "linkdash --config ./demo/demo.config.js"
+    "build:now": "linkdash --config ./demo/demo.config.js",
+    "dev:server": "ts-node-dev dev-server.ts"
   },
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "@now/node": "^1.5.0",
+    "@types/connect": "^3.4.33",
+    "@types/node": "^13.11.1",
+    "connect": "^3.7.0",
     "js-yaml": "^3.13.1",
-    "linkdash": "^0.0.3"
+    "linkdash": "^0.0.3",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.8.3"
   }
 }
