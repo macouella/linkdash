@@ -1,12 +1,12 @@
 import path from "path";
-import { ILinkdashCliOptions } from "./types";
+import { ILinkdashFileConfig, ILinkdashFileConfigFn } from "./types";
 
 /**
  * Loads a config file.
  */
 const loadFile = (fileToLoad: string) => {
   fileToLoad = path.resolve(fileToLoad);
-  const file: (() => ILinkdashCliOptions) | ILinkdashCliOptions = require(fileToLoad);
+  const file: ILinkdashFileConfig | ILinkdashFileConfigFn = require(fileToLoad);
   return file;
 };
 
