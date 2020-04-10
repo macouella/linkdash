@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import fs from "fs";
+import jsesc from "jsesc";
 import path from "path";
 import loadFile from "./loadFile";
 import { IBuildTemplateOptions } from "./types";
@@ -14,10 +15,11 @@ export const buildTemplate = (options: IBuildTemplateOptions) => {
   validateConfig(options);
   let template = fs.readFileSync(TEMPLATE_BASE).toString();
   const { htmlHead, ...filteredOptions } = options;
-  template = template.replace(
-    "//_linkdashConfig",
-    `window.linkdashConfig = JSON.parse(\`${JSON.stringify(filteredOptions)}\`)`
-  );
+  const escapedConfig = jsesc(filteredOptions as any, {
+    isScriptContext: true,
+    json: true,
+  });
+  template = template.replace("//_linkdashConfig", `window.linkdashConfig = ${escapedConfig};`);
 
   template = template.replace('<meta name="linkdashHead" content=""/>', htmlHead || "");
 
