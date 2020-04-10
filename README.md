@@ -23,7 +23,7 @@ On a professional team level, you might want a stored and filterable list of pre
 ## Usage
 
 ```sh
-[yarn/npm] add --dev linkdash
+[yarn add/npm i] --dev linkdash
 
 # Print the help menu
 [yarn/npx] linkdash --help
@@ -51,6 +51,11 @@ module.exports = async () => {
         title: "Visit Github",
         href: "https://github.com",
         group: "Site",
+
+        // optional attributes
+        keywords: "additional searchable text to improve searchability",
+        id: "generated_id_to_tag_href_target_names",
+        isBookmarked: false, // bookmarks the link by default
       },
     ],
     // [OR]
@@ -68,6 +73,12 @@ module.exports = async () => {
 };
 ```
 
+When serving a configuration via the host option, the json response needs to match this shape: [ILinkdashHostConfig](https://github.com/igimanaloto/linkdash/blob/master/src_lib/types.ts#L38). Example here: https://linkdash.now.sh/api/demo-config.
+
+## Beyond static html
+
+Check out the [examples folder](https://github.com/igimanaloto/linkdash/blob/master/examples) to see how linkdash can be used for cases such as running your own server (controlling the output) and using it as a personal deployment companion via git-hooks.
+
 ## Under the hood
 
 Linkdash simply swaps the contents of a prebuilt html file with your config. Check out the [package.json ](https://github.com/igimanaloto/linkdash/blob/master/package.json) to see the three depedencies it installs!
@@ -82,12 +93,13 @@ Linkdash simply swaps the contents of a prebuilt html file with your config. Che
 
 ## Other applications
 
-- Always finding yourself trying to remember things to do after a git push or server deploy? Use linkdash along-side githooks.
+- Always finding yourself trying to remember things to do after a git push or server deploy? [Use linkdash along-side githooks](https://github.com/igimanaloto/linkdash/tree/master/examples/with-git-hooks).
 - Smart url schemas exist everywhere, from `mailto:`, to `tel:` to app-specific calls like `skype:`, `spotify:` and `slack:`. Get creative!
-- If security and collaboration is required, you may utilise the `buildTemplate` helper in your favourite http kernel `express`, `http` or `serverless function`. That way, you can decide which authorization approach to secure your links dashboard with.
-- Feel free to fork to customise the html for your needs. (webpack / react / ts)
+- If security and collaboration is required, you may utilise linkdash's [buildTemplate](https://github.com/igimanaloto/linkdash/tree/master/examples/templated-http-response) helper in your favourite http kernel (`express`, `http`) or `serverless function`. That way, you can decide which authorization approach to secure your links dashboard with.
+- Feel free to fork to customise the html for your needs. (webpack / preact / ts)
 
 ## Future plans
 
 [ ] Add manifest.json capabilities so the file can be installed in mobile devices.
-[ ] Add a --spreadsheet option to read off Google sheets.
+
+[ ] Add a Google Sheets example
