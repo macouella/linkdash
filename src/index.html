@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="linkdashHead" content="" />
+    <script>
+      //_linkdashConfig
+      <% if (htmlWebpackPlugin.options.linkdashConfig){ %>
+        window.linkdashConfig = <%= htmlWebpackPlugin.options.linkdashConfig %>;
+      <% } %>
+    </script>
+    <%= htmlWebpackPlugin.options.htmlHead %>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

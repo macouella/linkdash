@@ -1,0 +1,274 @@
+$transition: 80ms ease-out all
+$grey-9: #909090
+$grey-d: #dadada
+$grey-f: #f1f1f1
+
+=touch
+  @media screen and (max-width: 1023px)
+    @content
+=desktop
+  @media screen and (min-width: 1024px)
+    @content
+
+html
+  font-size: 18px
+body
+  margin: 0
+  font-size: 1rem
+  line-height: 1.6
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+
+.terminal
+  padding: 1rem
+  box-sizing: border-box
+
+  *
+    box-sizing: border-box
+    outline: none
+  ::placeholder
+    color: $grey-9
+
+  .btn-list
+    text-align: center
+    display: flex
+    width: 100%
+    max-width: 40rem
+    margin-left: auto
+    margin-right: auto
+    justify-content: center
+    flex-flow: wrap
+
+  .btn-list a
+    margin-bottom: 1rem
+
+  .btn-list a
+    flex: none
+    width: 40%
+    margin-left: 1%
+    margin-right: 1%
+    display: inline-flex
+    padding: 1rem
+    border: 1px solid black
+
+
+  .btn-list a:hover
+    background: black
+    color: white
+
+
+  a
+    text-decoration: none
+    color: black
+
+
+  hr
+    margin-top: 1rem
+    margin-bottom: 1rem
+    border: none
+    border-top: 1px solid black
+
+
+  h3
+    margin-top: 0
+    text-align: center
+    font-size: 3rem
+    margin-bottom: 1rem
+
+  input
+    outline: none
+  .topbar
+    padding-left: 1rem
+    padding-right: 1rem
+    background: white
+    padding-top: 1rem
+    padding-bottom: 0.5rem
+    position: fixed
+    justify-content: space-between
+    top: 0
+    left: 0
+    width: 100%
+    display: flex
+  .topbar-left
+    flex: 1
+  .topbar-right
+    padding-left: 1rem
+    .button
+      height: 100%
+      width: 6rem
+      border: 2px solid black
+  .mid
+    padding-top: 4rem
+  .input-search
+    font-size: 1.25rem
+    display: block
+    font-weight: 500
+    padding: 0.75rem 0.75rem
+    border: 2px solid black
+    width: 100%
+
+  .search-item
+    display: flex
+    align-items: flex-start
+    padding: 0.15rem 0 0.25rem 0.5rem
+    +touch
+      padding-top: 0.3rem
+      padding-bottom: 0.4rem
+    .terminal:not(.terminal--mouse) &:hover, &.search-item--active
+      background: black
+      color: white
+      .search-item-bookmark
+        color: white
+        visibility: visible
+        stroke: currentColor
+
+  .search-item-name
+    display: block
+    flex: 1
+    font-size: 0.9rem
+    padding-left: 1rem
+  .search-item-group, .search-item-count
+    font-weight: 500
+    display: block
+    padding-top: 0.1rem
+    font-size: 0.8rem
+    text-transform: uppercase
+    color: $grey-9
+
+  .search-item-group
+    width: 5rem
+    white-space: nowrap
+    text-overflow: ellipsis
+    overflow: hidden
+    display: block
+
+  .search-item-count
+    margin-left: auto
+    padding-left: 1rem
+
+  .toolbar
+    position: fixed
+    bottom: 2rem
+    right: 0rem
+    padding: 1rem
+    max-width: 20rem
+    z-index: 1
+
+  .button
+    padding: 0.5rem 1rem
+    background: white
+    color: black
+    border: none
+    text-transform: lowercase
+    font-size: 0.9rem
+    line-height: 1
+    border: 1px solid black
+    cursor: pointer
+    &:hover
+      background: black
+      color: white
+  .button--dark
+    background: black
+    color: white
+    &:hover
+      opacity: 0.9
+
+  .top
+    position: relative
+
+  .loader-wrap
+    text-align: center
+    padding-top: 1rem
+    padding-bottom: 1rem
+  .loader
+    border: 5px solid $grey-f
+    animation: spin 600ms linear infinite
+    border-right: 5px solid $grey-9
+    border-radius: 50%
+    width: 3rem
+    height: 3rem
+    display: inline-flex
+  p, pre, code, ul, ol, li
+    margin-top: 0
+    margin-bottom: 0.5rem
+  pre
+    background: $grey-f
+    padding: 1rem
+  .search-item-bookmark
+    height: 1.1rem
+    width: 1.1rem
+    padding-top: 0.2rem
+    fill: none
+    color: $grey-d
+    stroke: currentColor
+    padding-right: 0.25rem
+    padding-left: 1.25rem
+    display: block
+    box-sizing: content-box
+    +desktop
+      visibility: hidden
+  .search-item-bookmark--active
+    fill: currentColor
+    visibility: visible
+
+  .menu
+    height: 100vh
+    top: 0
+    left: 0
+    width: 100%
+    position: fixed
+    background: rgba(#fff, 0.7)
+    display: flex
+    align-items: center
+    justify-content: center
+    overflow: hidden
+    z-index: 3
+  .menu-back
+    height: 100%
+    position: absolute
+    z-index: 1
+    top: 0
+    left: 0
+    height: 100%
+    width: 100%
+  .menu-content
+    position: relative
+    z-index: 2
+    margin-left: 1rem
+    margin-right: 1rem
+    padding: 1rem
+    background: white
+    border: 2px solid black
+    width: 100%
+    max-width: 24rem
+  .menu-list
+    list-style-type: none
+    padding: 0
+    margin-top: 0
+    margin-bottom: 2rem
+    > div
+      width: 100%
+      display: flex
+      flex-wrap: wrap
+    dt
+      width: 30%
+    dd
+      width: 70%
+      padding-left: 0.5rem
+    dt, dd
+      margin: 0
+  .menu-title
+    margin-top: 0
+    font-size: 1.25rem
+    margin-bottom: 1.5rem
+  .buttons
+    .button:not(:last-child)
+      margin-right: 0.5rem
+
+  .d-touch-none
+    +touch
+      display: none !important

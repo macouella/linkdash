@@ -1,0 +1,21 @@
+# Logs
+logs
+*.log
+.DS_Store
+
+# IDE
+.idea
+.vscode
+
+node_modules
+
+# Built files
+build
+lib
+/linkdash.config.js
+/linkdash.html
+*.tgz
+
+coverage
+
+examples/**/*.lock

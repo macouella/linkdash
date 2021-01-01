@@ -1,0 +1,17 @@
+{
+  "name": "hook",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "gen:docs": "linkdash"
+  },
+  "devDependencies": {
+    "husky": "^4.2.3",
+    "linkdash": "^0.0.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "yarn gen:docs"
+    }
+  }
+}
