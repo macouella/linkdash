@@ -59,7 +59,7 @@
     "classnames": "^2.2.6",
     "copy-webpack-plugin": "^7.0.0",
     "css-loader": "^5.0.1",
-    "eslint": "^7.16.0",
+    "eslint": "^7.17.0",
     "eslint-config-jnprt": "^0.0.14",
     "eslint-config-prettier": "^7.1.0",
     "file-loader": "^6.2.0",
