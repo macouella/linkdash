@@ -60,7 +60,7 @@
     "copy-webpack-plugin": "^7.0.0",
     "css-loader": "^5.0.1",
     "eslint": "^7.17.0",
-    "eslint-config-jnprt": "^0.0.14",
+    "eslint-config-jnprt": "^0.0.15",
     "eslint-config-prettier": "^7.1.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.0.0-beta.1",

@@ -3518,10 +3518,10 @@ eslint-ast-utils@^1.1.0:
     lodash.get "^4.4.2"
     lodash.zip "^4.2.0"
 
-eslint-config-jnprt@^0.0.14:
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/eslint-config-jnprt/-/eslint-config-jnprt-0.0.14.tgz#155590a90da049d0e8cd542c75e1802d93f0a9e8"
-  integrity sha512-nLjz/9ZAzEoRuLVQ+SaKhg9IDeidwGN3SkU5TEFxJ/w3gpNW5SgTkkQpf9r0maKHo25d6Bs7c5XK1ooDGyRO1Q==
+eslint-config-jnprt@^0.0.15:
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/eslint-config-jnprt/-/eslint-config-jnprt-0.0.15.tgz#36b63804446448d103380b8360424102ec48c56d"
+  integrity sha512-a/CE70lm573R/czvRq6kesLsrjxXT45jb9y5fHI1WpntEv7Vr4GNnVs0PvQj5OzDQ0SgKzcLBXTeiAH9hKeItA==
   dependencies:
     "@types/eslint" "^7.2.6"
     "@typescript-eslint/eslint-plugin" "^4.11.1"
