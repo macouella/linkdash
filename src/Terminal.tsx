@@ -1,17 +1,37 @@
+/* eslint-disable unicorn/no-array-reduce */
 import cn from "classnames";
-import matchSorter from "match-sorter";
+import { matchSorter } from "match-sorter";
 import { h } from "preact";
 import { memo } from "preact/compat";
-import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "preact/hooks";
 import { ILinkdashRow } from "../src_lib/types";
 import ls from "./ls";
 import words from "./words";
 
-const GLOBAL_KEYS = ["Enter", "ArrowDown", "Tab", "ArrowDown", "Shift", "Meta"];
+const GLOBAL_KEYS = new Set([
+  "Enter",
+  "ArrowDown",
+  "Tab",
+  "ArrowDown",
+  "Shift",
+  "Meta",
+]);
 
 const Nothing = () => <p>{words.nothing}</p>;
 
-const Menu = ({ children, closeMenu }: { closeMenu: any; children: preact.ComponentChildren }) => {
+const Menu = ({
+  children,
+  closeMenu,
+}: {
+  closeMenu: any;
+  children: preact.ComponentChildren;
+}) => {
   return (
     <div className="menu">
       <div className="menu-back" onClick={closeMenu}></div>
@@ -86,8 +106,10 @@ const Linkie = memo(
         const isInViewport =
           rect.top >= 0 &&
           rect.left >= 0 &&
-          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-          rect.right <= (window.innerWidth || document.documentElement.clientWidth);
+          rect.bottom <=
+            (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.right <=
+            (window.innerWidth || document.documentElement.clientWidth);
 
         if (!isInViewport) {
           aRef.current.scrollIntoView();
@@ -152,12 +174,12 @@ export default function ({
   >(ls.get("uiStore") || {});
 
   const searchEl = useRef<HTMLInputElement | null>(null);
-  const [filter, setFilter] = useState<string | undefined>(undefined);
-  const [lastAction, setLastAction] = useState<string | undefined>(undefined);
+  const [filter, setFilter] = useState<string | null>(null);
+  const [lastAction, setLastAction] = useState<string | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [highlightedIdx, setHighlightedIdx] = useState(0);
   const [navMode, setNavMode] = useState<"keyboard" | "mouse">("keyboard");
-  const [rows, setRows] = useState<ILinkdashRow[] | undefined>(undefined);
+  const [rows, setRows] = useState<ILinkdashRow[] | null>(null);
 
   const closeMenu = () => {
     ls.set("introDone", 1);
@@ -196,7 +218,7 @@ export default function ({
 
   const results = useMemo(() => {
     if (rows) {
-      if (filter && !filter.match(/^#/)) {
+      if (filter && !filter.startsWith("#")) {
         return matchSorter(rows, filter, {
           keys: ["href", "title", "group", "keywords", "catchall"],
         });
@@ -229,16 +251,15 @@ export default function ({
 
   const handleAction = useCallback(
     (key: string) => (evt?: any) => {
-      if (evt) {
-        if (
-          evt.target &&
-          (evt.target.closest(".search-item-bookmark") ||
-            evt.target.classList.contains(".search-item-bookmark"))
-        ) {
-          evt.preventDefault();
-          toggleBookmark(key);
-          return false;
-        }
+      if (
+        evt &&
+        evt.target &&
+        (evt.target.closest(".search-item-bookmark") ||
+          evt.target.classList.contains(".search-item-bookmark"))
+      ) {
+        evt.preventDefault();
+        toggleBookmark(key);
+        return false;
       }
 
       setUiStore((old) => {
@@ -260,7 +281,7 @@ export default function ({
   useEffect(() => {
     try {
       ls.set("uiStore", uiStore);
-    } catch (e) {
+    } catch {
       // can't do that
     }
   }, [uiStore]);
@@ -269,7 +290,7 @@ export default function ({
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      if (GLOBAL_KEYS.includes(e.key)) e.preventDefault();
+      if (GLOBAL_KEYS.has(e.key)) e.preventDefault();
       if (e.key === "Enter" && selectedRow) {
         handleAction(selectedRow.id!)();
         window.open(selectedRow.href, selectedRow.href);
@@ -352,12 +373,12 @@ export default function ({
 
   const handleInputChange: h.JSX.KeyboardEventHandler<HTMLInputElement> = useCallback(
     (e) => {
-      if (!!e.currentTarget.value.trim()) {
+      if (e.currentTarget.value.trim()) {
         setFilter(e.currentTarget.value);
       } else {
         e.preventDefault();
         e.currentTarget.value = "";
-        setFilter(undefined);
+        setFilter(null);
       }
     },
     [setFilter]
@@ -381,7 +402,7 @@ export default function ({
   };
 
   const isDisplayCantLoad = isLoadingDone && !rows;
-  const isDisplayNothing = results && !results.length;
+  const isDisplayNothing = results && results.length === 0;
 
   return (
     <div
@@ -412,7 +433,11 @@ export default function ({
             })}
           </dl>
           <div className="buttons">
-            <button onClick={closeMenu} type="button" className="button button--dark">
+            <button
+              onClick={closeMenu}
+              type="button"
+              className="button button--dark"
+            >
               {words.menuClose}
             </button>
             <button className="button" type="button" onClick={handleReset}>
@@ -441,7 +466,9 @@ export default function ({
       </div>
       <div className="mid">
         {isDisplayNothing && <Nothing />}
-        {!isLoadingDone && <Loader message={`${words.loaderMessage} ${loadType}...`} />}
+        {!isLoadingDone && (
+          <Loader message={`${words.loaderMessage} ${loadType}...`} />
+        )}
         {isDisplayCantLoad && <CantLoad loadType={loadType} />}
         {results &&
           results.map((x, idx) => (

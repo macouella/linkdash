@@ -1,10 +1,15 @@
 #!/usr/bin/env node
 
+import * as fs from "fs";
+import path from "path";
 import commandLineArgs from "command-line-args";
 import commandLineUsage from "command-line-usage";
-import * as fs from "fs";
-import * as path from "path";
-import { getFileToLoad, mergeOptions, processTemplate, validateOptions } from "./binHelpers";
+import {
+  getFileToLoad,
+  mergeOptions,
+  processTemplate,
+  validateOptions,
+} from "./bin-helpers";
 import { ILinkdashCliArgs } from "./types";
 
 export const DEFAULT_FILENAME = "linkdash.html";
@@ -32,13 +37,21 @@ const optionDefinitions: Array<{
     defaultOption: true,
     description: "The path to a linkdash config",
   },
-  { name: "host", type: String, description: "A url that responds with a linkdash-like config." },
+  {
+    name: "host",
+    type: String,
+    description: "A url that responds with a linkdash-like config.",
+  },
   {
     name: "output",
     type: String,
     description: `The path of the generated file or {underline text} to pipe out to the terminal / stdout`.trim(),
   },
-  { name: "disableOpen", type: Boolean, description: "Disable auto-opening the generated file" },
+  {
+    name: "disableOpen",
+    type: Boolean,
+    description: "Disable auto-opening the generated file",
+  },
   {
     name: "enableAutoMenu",
     type: Boolean,
@@ -75,7 +88,9 @@ const options = commandLineArgs(optionDefinitions) as ILinkdashCliArgs;
 const logHelp = (exitCode = 0) => {
   console.log(usage);
   if (exitCode === 0) {
-    console.log("No linkdash.config.js found. Generate one using npx linkdash --init");
+    console.log(
+      "No linkdash.config.js found. Generate one using npx linkdash --init"
+    );
   }
 
   process.exit(exitCode);
@@ -84,7 +99,7 @@ const logHelp = (exitCode = 0) => {
 const copyConfigFile = () => {
   if (!fs.existsSync(CONFIG_COPY_PATH)) {
     fs.copyFileSync(CONFIG_TEMPLATE, CONFIG_COPY_PATH);
-    console.log("Config file created: ", CONFIG_COPY_PATH);
+    console.log("Config file created:", CONFIG_COPY_PATH);
     process.exit(0);
   } else {
     console.log("Prevented an overwrite. Delete your existing config first.");

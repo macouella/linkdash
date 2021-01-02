@@ -1,16 +1,16 @@
+import * as _fs from "fs";
+import _path from "path";
+import _open from "open";
+import { mocked } from "ts-jest/utils";
 import {
   ensureDirectoryExistence,
-  getFileToLoad,
-  validateOptions,
-  mergeOptions,
   exitInvalidFile,
+  getFileToLoad,
   logOrSaveTemplate,
-} from "./binHelpers";
-import * as _fs from "fs";
-import * as _path from "path";
-import { mocked } from "ts-jest/utils";
+  mergeOptions,
+  validateOptions,
+} from "./bin-helpers";
 import * as _index from ".";
-import _open from "open";
 
 const open = _open as jest.Mock;
 

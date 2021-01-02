@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import fs from "fs";
-import jsesc from "jsesc";
 import path from "path";
-import loadFile from "./loadFile";
+import jsesc from "jsesc";
+import loadFile from "./load-file";
 import { IBuildTemplateOptions } from "./types";
-import validateConfig from "./validateConfig";
+import validateConfig from "./validate-config";
 
 const TEMPLATE_BASE = path.resolve(__dirname, "../build/index.html");
 
@@ -19,9 +19,15 @@ export const buildTemplate = (options: IBuildTemplateOptions) => {
     isScriptContext: true,
     json: true,
   });
-  template = template.replace("//_linkdashConfig", `window.linkdashConfig = ${escapedConfig};`);
+  template = template.replace(
+    "//_linkdashConfig",
+    `window.linkdashConfig = ${escapedConfig};`
+  );
 
-  template = template.replace('<meta name="linkdashHead" content=""/>', htmlHead || "");
+  template = template.replace(
+    '<meta name="linkdashHead" content=""/>',
+    htmlHead || ""
+  );
 
   return template;
 };

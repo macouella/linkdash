@@ -11,7 +11,8 @@ const App = function () {
   const [isLoadingDone, setIsLoadingDone] = useState<boolean>(false);
   useEffect(() => {
     (async () => {
-      const windowConfig: IBaseLinkdashConfig = (window as any).linkdashConfig || {};
+      const windowConfig: IBaseLinkdashConfig =
+        (window as any).linkdashConfig || {};
       const qu: IBaseLinkdashConfig = parse(location.search.slice(1));
       let confie = { ...windowConfig, ...qu };
       const host = confie.host;
@@ -22,11 +23,13 @@ const App = function () {
 
       try {
         if (host) {
-          const hostConfig: IBaseLinkdashConfig = await fetch(host).then((res) => res.json());
+          const hostConfig: IBaseLinkdashConfig = await fetch(
+            host
+          ).then((res) => res.json());
           confie = { ...confie, ...hostConfig };
         }
 
-        if (!confie.urls) throw Error(words.errorLoading);
+        if (!confie.urls) throw new Error(words.errorLoading);
 
         confie.urls = confie.urls.map((x) => {
           return {
@@ -34,7 +37,7 @@ const App = function () {
               x.id ||
               [x.group, x.title]
                 .join(" ")
-                .match(/[a-zA-Z0-9]+/g)!
+                .match(/[\dA-Za-z]+/g)!
                 .join("_"),
             count: 0,
             catchall: [x.group, x.title, x.keywords].join(" "),
@@ -51,7 +54,9 @@ const App = function () {
     })();
   }, []);
 
-  const loadType = config.host ? config.host.split("?")[0] : words.typeWindowConfig;
+  const loadType = config.host
+    ? config.host.split("?")[0]
+    : words.typeWindowConfig;
 
   return (
     <Terminal

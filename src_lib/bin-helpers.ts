@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/prefer-regexp-exec */
+/* eslint-disable unicorn/no-lonely-if */
+/* eslint-disable unicorn/no-process-exit */
 import * as fs from "fs";
+import path from "path";
 import open from "open";
-import * as path from "path";
-import { buildTemplate, loadConfig } from ".";
 import { ILinkdashCliMergedOptions } from "./types";
+import { buildTemplate, loadConfig } from ".";
 
 /**
  * Gets a file to load.
@@ -19,7 +22,11 @@ export const getFileToLoad = (defaultValue: string, configPath?: string) => {
 /**
  * Validates cli options.
  */
-export const validateOptions = ({ output, host, urls }: Partial<ILinkdashCliMergedOptions>) => {
+export const validateOptions = ({
+  output,
+  host,
+  urls,
+}: Partial<ILinkdashCliMergedOptions>) => {
   if (host) {
     if (!/^https?:\/\//.test(host)) {
       console.log(
@@ -31,13 +38,17 @@ export const validateOptions = ({ output, host, urls }: Partial<ILinkdashCliMerg
 
   if (urls && host) {
     console.log(urls, host);
-    console.log("Found urls and host both in the same file. Only specify one or the other.");
+    console.log(
+      "Found urls and host both in the same file. Only specify one or the other."
+    );
     process.exit(1);
   }
 
   if (output) {
     if (!output.match(/(.html?$|text)/)) {
-      console.log("Please provide a valid html output path e.g. ./something/index.html");
+      console.log(
+        "Please provide a valid html output path e.g. ./something/index.html"
+      );
       process.exit(1);
     }
   }
@@ -58,7 +69,10 @@ export const ensureDirectoryExistence = (filePath: string) => {
 /**
  * Merges cli and file-based options.
  */
-export const mergeOptions = async (options: ILinkdashCliMergedOptions, fileToLoad?: string) => {
+export const mergeOptions = async (
+  options: ILinkdashCliMergedOptions,
+  fileToLoad?: string
+) => {
   let opts = { ...options };
   if (fileToLoad) {
     const fileConfig = await loadConfig(fileToLoad);
@@ -128,7 +142,10 @@ export const logOrSaveTemplate = ({
 /**
  * Builds a template and outputs to a file or stdout
  */
-export const processTemplate = (opts: ILinkdashCliMergedOptions, fallbackFilename: string) => {
+export const processTemplate = (
+  opts: ILinkdashCliMergedOptions,
+  fallbackFilename: string
+) => {
   try {
     const template = buildTemplate(opts);
     const { output, disableOpen } = opts;

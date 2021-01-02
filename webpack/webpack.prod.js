@@ -1,10 +1,10 @@
-const common = require("./webpack.common.js");
-const merge = require("webpack-merge");
-
-const InlineChunkHtmlPlugin = require("./InlineChunkHtmlPlugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const TerserPlugin = require("terser-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
+const { merge } = require("webpack-merge");
+const InlineChunkHtmlPlugin = require("./InlineChunkHtmlPlugin");
+const common = require("./webpack.common.js");
 
 const { devServer, ...conf } = common("production");
 

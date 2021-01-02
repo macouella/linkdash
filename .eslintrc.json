@@ -1,34 +1,10 @@
 {
-  "parser": "@typescript-eslint/parser",
-  "extends": ["plugin:@typescript-eslint/recommended", "prettier", "prettier/@typescript-eslint"],
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      }
-    }
-  },
-  "rules": {
-    "@typescript-eslint/interface-name-prefix": [1, { "prefixWithI": "always" }],
-    "@typescript-eslint/no-var-requires": "off"
-  },
-  "env": {
-    "browser": true,
-    "node": true,
-    "es6": true
-  },
+  "extends": ["jnprt/next"],
+  "globals": {},
+  "rules": {},
   "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    }
+    "tsconfigRootDir": "./",
+    "project": ["./tsconfig.json"]
   },
-  "overrides": [
-    {
-      "files": ["**/*.test.{js,ts,tsx,jsx}"],
-      "env": {
-        "jest": true
-      },
-      "plugins": ["jest"]
-    }
-  ]
+  "overrides": []
 }
