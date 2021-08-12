@@ -373,13 +373,19 @@ js-yaml@^3.13.1:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
-linkdash@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/linkdash/-/linkdash-0.0.3.tgz#6c838fd8c52c9ec0dc82ec111a379327b0c47629"
-  integrity sha512-dvrftvI+1Xf2qLIrFM5QLi/6n4voneFNPOJNAIbvzXfbgxDh558evGDw0CRglAeFUh73ZkAJSFdRH/PSbQ1HDA==
+jsesc@^3.0.1:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-3.0.2.tgz#bb8b09a6597ba426425f2e4a07245c3d00b9343e"
+  integrity sha512-xKqzzWXDttJuOcawBt4KnKHHIf5oQ/Cxax+0PWFG+DFDgHNAdi+TXECADI+RYiFUMmx8792xsMbbgXj4CwnP4g==
+
+linkdash@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/linkdash/-/linkdash-0.0.5.tgz#f9c95044153c7cec46e813a0aa59addec450e531"
+  integrity sha512-Oh9GD8VHKJP+ZHKGbw4jOpS/9ShYr9e5OaL5X3+fNSpECQpem9U/TjSjfMgRCY/DNRA089xf6lf9Y9tZm/0fqQ==
   dependencies:
     command-line-args "^5.1.1"
     command-line-usage "^6.1.0"
+    jsesc "^3.0.1"
     open "^7.0.3"
 
 load-json-file@^1.0.0:
@@ -529,9 +535,9 @@ path-is-absolute@^1.0.0:
   integrity sha1-F0uSaHNVNP+8es5r9TpanhtcX18=
 
 path-parse@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
-  integrity sha512-GSmOT2EbHrINBf9SR7CDELwlJ8AENk3Qn7OikK4nFYAu3Ote2+JYNVvkpAEQm3/TLNEJFD/xZJjzyxg3KBWOzw==
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.7.tgz#fbc114b60ca42b30d9daf5858e4bd68bbedb6735"
+  integrity sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==
 
 path-type@^1.0.0:
   version "1.1.0"
